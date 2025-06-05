@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'Features/AddMedication/presentation/views/add_med_view.dart';
 import 'Features/Home/presentation/views/home_view.dart';
 
 void main() {
@@ -13,7 +14,7 @@ class PillReminder extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeView(),
+      home: AddMedView(),
     );
   }
 }
