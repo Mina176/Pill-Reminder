@@ -13,6 +13,7 @@ class PillReminder extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(fontFamily: 'Nunito'),
       home: HomeView(),
     );
   }
