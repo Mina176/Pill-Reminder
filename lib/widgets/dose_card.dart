@@ -34,35 +34,37 @@ class _DoseCardState extends State<DoseCard> {
               SizedBox(
                 width: 32,
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Ibrofen 50mg',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900),
-                  ),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.alarm,
-                        size: 18,
-                        color: Color(0xFF8D8D8B),
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        '7:30 am',
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text('Ibrofen 50mg',
                         style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            color: Color(0xFF8D8D8B)),
-                      )
-                    ],
-                  )
-                ],
+                            fontSize: 24, fontWeight: FontWeight.w900),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.alarm,
+                          size: 18,
+                          color: Color(0xFF8D8D8B),
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          '7:30 am',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              color: Color(0xFF8D8D8B)),
+                        )
+                      ],
+                    )
+                  ],
+                ),
               ),
-              Spacer(),
               AlertToggle(
                   onPressed: () {
                     setState(() {

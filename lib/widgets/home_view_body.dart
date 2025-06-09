@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'package:pill_reminder/widgets/custom_date_picker.dart';
-
-import 'dose_card.dart';
+import 'Dose_cards_list_view.dart';
 
 class HomeViewBody extends StatelessWidget {
   const HomeViewBody({super.key});
@@ -10,16 +8,8 @@ class HomeViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
-        CustomDatePicker(),
-        Expanded(
-            child: ListView.builder(
-          itemCount: 10,
-          itemBuilder: (context, index) {
-            return DoseCard();
-          },
-        ))
-      ],
+      children: [CustomDatePicker(), DoseCardsListView()],
     );
   }
 }
+
