@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pill_reminder/views/addDoseVew/widgets/dose_count_item.dart';
 
-class MedDoseSelectSection extends StatelessWidget {
-  const MedDoseSelectSection({
+class MedDoseSection extends StatelessWidget {
+  const MedDoseSection({
     super.key,
     required this.selectedindex,
     required this.onChanged,
