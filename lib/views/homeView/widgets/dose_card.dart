@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:pill_reminder/widgets/alert_toggle.dart';
+import 'package:pill_reminder/views/homeView/widgets/alert_toggle.dart';
 
 class DoseCard extends StatefulWidget {
   const DoseCard({super.key});
