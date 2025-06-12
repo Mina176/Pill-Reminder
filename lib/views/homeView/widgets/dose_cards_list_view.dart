@@ -17,8 +17,8 @@ class _DoseCardsListViewState extends State<DoseCardsListView> {
     DoseModel(
       remind: false,
       medName: 'Mina',
-      form: 0,
-      dose: 0,
+      form: 1,
+      dose: 1,
       food: 0,
       duration: 0,
       time: '6:00 Am',

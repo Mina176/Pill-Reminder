@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:pill_reminder/models/dose_model.dart';
 import 'constants.dart';
 import 'views/homeView/home_view.dart';
 
@@ -7,6 +8,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   await Hive.openBox(kDoseBox);
+  Hive.registerAdapter(DoseModelAdapter());
 
   runApp(const PillReminder());
 }

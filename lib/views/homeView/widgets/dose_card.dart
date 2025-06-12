@@ -53,11 +53,11 @@ class DoseCard extends StatelessWidget {
                     height: 7,
                   ),
                   Text(
-                    'dose =  ${doseModel.dose.toString()}',
+                    'dose: ${doseModel.dose.toString()} ${intFormToString(doseModel.form)}',
                     style: kFeaturesStyle,
                   ),
                   Text(
-                    'food =  ${intFoodToString(doseModel.food)}',
+                    'food:  ${intFoodToString(doseModel.food)}',
                     style: kFeaturesStyle,
                   ),
                 ],
