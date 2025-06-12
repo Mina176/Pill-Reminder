@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'views/addDoseVew/add_dose_view.dart';
 import 'views/homeView/home_view.dart';
 
 void main() {
@@ -12,8 +11,9 @@ class PillReminder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(fontFamily: 'Nunito'),
-        home: HomeView());
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(fontFamily: 'Nunito'),
+      home: HomeView(),
+    );
   }
 }

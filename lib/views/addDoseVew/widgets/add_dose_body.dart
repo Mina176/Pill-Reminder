@@ -35,6 +35,8 @@ class _AddDoseBodyState extends State<AddDoseBody> {
     '60 days',
     '75 days',
     '90 days',
+    '105 days',
+    '120 days',
   ];
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();

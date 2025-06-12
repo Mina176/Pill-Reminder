@@ -8,8 +8,10 @@ class HomeViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [CustomDatePicker(), DoseCardsListView()],
+      children: [
+        CustomDatePicker(),
+        DoseCardsListView(),
+      ],
     );
   }
 }
-

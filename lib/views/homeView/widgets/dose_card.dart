@@ -1,79 +1,99 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:pill_reminder/views/homeView/widgets/alert_toggle.dart';
+import 'package:pill_reminder/constants.dart';
+import 'package:pill_reminder/models/dose_model.dart';
 
-class DoseCard extends StatefulWidget {
-  const DoseCard({super.key});
+class DoseCard extends StatelessWidget {
+  const DoseCard({
+    super.key,
+    required this.doseModel,
+  });
 
-  @override
-  State<DoseCard> createState() => _DoseCardState();
-}
-
-class _DoseCardState extends State<DoseCard> {
-  bool alertOn = true;
+  final DoseModel doseModel;
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Container(
-          height: 150,
-          decoration: BoxDecoration(
-            color: Color(0xFFE5E5E6),
-            borderRadius: BorderRadius.circular(16),
-          ),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.06), // very subtle shadow
+              blurRadius: 8,
+              offset: Offset(0, 8.5),
+            ),
+          ],
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(
-                width: 32,
-              ),
-              Icon(
-                FontAwesomeIcons.tablets,
-                color: Color(0xFF49454F),
-                size: 36,
-              ),
-              SizedBox(
-                width: 32,
-              ),
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Text('Ibrofen 50mg',
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Icon(
+                        doseModel.form == DoseModel.
+                            ? FontAwesomeIcons.tablets
+                            : doseModel.form == DoseModel.formPill
+                                ? FontAwesomeIcons.pills
+                                : FontAwesomeIcons.syringe,
+                        color: kPrimaryColor,
+                        size: 26,
+                      ),
+                      SizedBox(width: 16),
+                      Text(
+                        doseModel.medName,
                         style: TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.w900),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.alarm,
-                          size: 18,
-                          color: Color(0xFF8D8D8B),
-                        ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Text(
-                          '7:30 am',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              color: Color(0xFF8D8D8B)),
-                        )
-                      ],
-                    )
-                  ],
-                ),
+                            fontSize: 22, fontWeight: FontWeight.w800),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 7,
+                  ),
+                  Text(
+                    'Dose: ${doseModel.dose} ${DoseModel.formToString(doseModel.form)}',
+                    style: kFeaturesStyle,
+                  ),
+                  Text(
+                    'Featuers: $food',
+                    style: kFeaturesStyle,
+                  ),
+                ],
               ),
-              AlertToggle(
-                  onPressed: () {
-                    setState(() {
-                      alertOn = !alertOn;
-                    });
-                  },
-                  alertOn: alertOn)
+              Column(
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.more_vert,
+                        size: 32, color: Colors.black.withAlpha(140)),
+                    onPressed: () {},
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    time,
+                    style: TextStyle(fontWeight: FontWeight.w800, fontSize: 16),
+                  ),
+                ],
+              ),
             ],
-          )),
+          ),
+        ),
+      ),
     );
   }
+
+  
 }
+ 
+
+
+// Padding(
+      // padding: const EdgeInsets.all(8.0),
+      // child: 
