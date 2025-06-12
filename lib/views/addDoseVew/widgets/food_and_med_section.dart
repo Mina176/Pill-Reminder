@@ -55,7 +55,7 @@ class FoodCard extends StatelessWidget {
         onTap: onPressed,
         child: Container(
           width: 100,
-          height: 100,
+          height: 60,
           decoration: BoxDecoration(
               color: isSelected ? kPrimaryColor : Colors.white,
               borderRadius: BorderRadius.circular(8),

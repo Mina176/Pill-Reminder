@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
 
-class MedTime extends StatelessWidget {
-  const MedTime({super.key, required this.onTap, required this.displayedTime});
+class MedDurationSec extends StatelessWidget {
+  const MedDurationSec({
+    super.key,
+    required this.onTap,
+    required this.displayedDuration,
+  });
   final VoidCallback onTap;
-  final String displayedTime;
+  final String displayedDuration;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -13,16 +17,16 @@ class MedTime extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.only(left: 8),
-          child: Text('Time:', style: kSubTitleStyle),
+          child: Text('Duration:', style: kSubTitleStyle),
         ),
         GestureDetector(
           onTap: onTap,
           child: Container(
             width: double.infinity,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
               color: Colors.white,
-              border: Border.all(color: kDisabledColor, width: 0.2),
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: kDisabledColor, width: 0.1),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black
@@ -36,7 +40,7 @@ class MedTime extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  displayedTime,
+                  displayedDuration,
                   style: TextStyle(fontSize: 26, fontWeight: FontWeight.w700),
                 ),
               ),

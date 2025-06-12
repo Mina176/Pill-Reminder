@@ -4,8 +4,8 @@ import '../../../constants.dart';
 import 'med_name_text_field.dart';
 
 class AddMedNameSection extends StatelessWidget {
-  const AddMedNameSection({super.key});
-
+  const AddMedNameSection({super.key, this.onSaved});
+  final void Function(String?)? onSaved;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -18,7 +18,12 @@ class AddMedNameSection extends StatelessWidget {
             style: kSubTitleStyle,
           ),
         ),
-        MedNameTextField(),
+        SizedBox(
+          height: 70,
+          child: MedNameTextField(
+            onSaved: onSaved,
+          ),
+        ),
       ],
     );
   }

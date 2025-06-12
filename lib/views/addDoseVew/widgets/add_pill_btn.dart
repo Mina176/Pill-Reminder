@@ -4,7 +4,7 @@ import 'package:pill_reminder/constants.dart';
 class CustomBtn extends StatelessWidget {
   const CustomBtn({
     super.key,
-    this.onTap,
+    required this.onTap,
     required this.label,
   });
   final String label;

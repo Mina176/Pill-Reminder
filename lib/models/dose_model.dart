@@ -1,16 +1,19 @@
-enum Type { pill, tablet, syringe }
-
-enum Food { beforeMeal, afterMeal, midMeal }
-
 class DoseModel {
-  final String name;
+  final String medName;
+  final int type;
+  final int dose;
+  final int food;
+  final int duration;
   final String time;
-  final Food food;
-  final Type type;
+  final bool remind;
 
-  DoseModel(
-      {required this.name,
-      required this.time,
-      required this.food,
-      required this.type});
+  DoseModel({
+    required this.remind,
+    required this.medName,
+    required this.type,
+    required this.dose,
+    required this.food,
+    required this.duration,
+    required this.time,
+  });
 }
