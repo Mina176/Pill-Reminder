@@ -2,9 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pill_reminder/views/addDoseVew/widgets/med_dose_select_section.dart';
 import 'add_med_name_section.dart';
+import 'add_pill_btn.dart';
 import 'add_pill_time.dart';
 import 'food_and_med_section.dart';
 import 'med_type_select_section.dart';
+import 'remind_me_section.dart';
 
 class AddDoseBody extends StatefulWidget {
   const AddDoseBody({super.key});
@@ -17,6 +19,7 @@ class _AddDoseBodyState extends State<AddDoseBody> {
   int selectedDose = 0;
   int selectedType = 0;
   int selectedFood = 0;
+  bool? remind = true;
 
   TimeOfDay? selectedTime;
 
@@ -64,7 +67,20 @@ class _AddDoseBodyState extends State<AddDoseBody> {
         AddPillTime(
           onTap: showTimePicker,
           displayedTime: formattedTime,
-        )
+        ),
+        SizedBox(height: 10),
+        RemindMeSection(
+          value: remind!,
+          onChanged: (value) {
+            setState(() {
+              remind = value;
+            });
+          },
+        ),
+        SizedBox(height: 10),
+        CustomBtn(
+          label: 'Add Medicine',
+        ),
       ],
     );
   }
