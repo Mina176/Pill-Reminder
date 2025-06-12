@@ -10,7 +10,10 @@ class AddDoseView extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: AddDoseBody(),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: AddDoseBody(),
+        ),
       ),
     );
   }

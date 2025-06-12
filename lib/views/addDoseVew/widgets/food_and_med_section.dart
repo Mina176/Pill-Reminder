@@ -15,10 +15,11 @@ class FoodAndMedSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Food and Medication',
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900),
+        Padding(
+          padding: const EdgeInsets.only(left: 8),
+          child: Text('Food and Medication:', style: kSubTitleStyle),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -70,7 +71,7 @@ class FoodCard extends StatelessWidget {
               text,
               style: TextStyle(
                   color: isSelected ? Colors.white : Colors.black,
-                  fontWeight: FontWeight.w500),
+                  fontWeight: FontWeight.w400),
             ),
           ),
         ),

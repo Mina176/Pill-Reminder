@@ -9,14 +9,14 @@ class AddMedNameSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Add Medication',
-          style: TextStyle(
-              color: kPrimaryColor, fontSize: 36, fontWeight: FontWeight.w900),
-        ),
-        SizedBox(
-          height: 10,
+        Padding(
+          padding: const EdgeInsets.only(left: 8),
+          child: Text(
+            'Medication Name:',
+            style: kSubTitleStyle,
+          ),
         ),
         MedNameTextField(),
       ],

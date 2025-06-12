@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pill_reminder/views/addDoseVew/widgets/med_dose_select_section.dart';
+import '../../../constants.dart';
 import 'add_med_name_section.dart';
 import 'add_pill_btn.dart';
 import 'add_pill_time.dart';
 import 'food_and_med_section.dart';
+import 'med_name_text_field.dart';
 import 'med_type_select_section.dart';
 import 'remind_me_section.dart';
 
@@ -27,11 +29,12 @@ class _AddDoseBodyState extends State<AddDoseBody> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        Text('Add Medication', style: kTitleStyle),
         AddMedNameSection(),
         SizedBox(
-          height: 20,
+          height: 15,
         ),
-        MedTypeSection(
+        MedFormSection(
           selectedindex: selectedType,
           onChanged: (value) {
             setState(() {
@@ -40,7 +43,7 @@ class _AddDoseBodyState extends State<AddDoseBody> {
           },
         ),
         SizedBox(
-          height: 10,
+          height: 15,
         ),
         DoseSection(
           selectedindex: selectedDose,
@@ -51,7 +54,7 @@ class _AddDoseBodyState extends State<AddDoseBody> {
           },
         ),
         SizedBox(
-          height: 10,
+          height: 15,
         ),
         FoodAndMedSection(
           selectedindex: selectedFood,
@@ -62,13 +65,12 @@ class _AddDoseBodyState extends State<AddDoseBody> {
           },
         ),
         SizedBox(
-          height: 10,
+          height: 15,
         ),
-        AddPillTime(
+        MedTime(
           onTap: showTimePicker,
           displayedTime: formattedTime,
         ),
-        SizedBox(height: 10),
         RemindMeSection(
           value: remind!,
           onChanged: (value) {
@@ -77,10 +79,12 @@ class _AddDoseBodyState extends State<AddDoseBody> {
             });
           },
         ),
-        SizedBox(height: 10),
+        Spacer(),
         CustomBtn(
           label: 'Add Medicine',
         ),
+        SizedBox(height: 15),
+        
       ],
     );
   }
@@ -136,7 +140,7 @@ class _AddDoseBodyState extends State<AddDoseBody> {
   }
 
   String get formattedTime {
-    if (selectedTime == null) return "";
+    if (selectedTime == null) return "8:00 PM";
     final hour = selectedTime!.hourOfPeriod.toString().padLeft(2, '0');
     final minute = selectedTime!.minute.toString().padLeft(2, '0');
     final period = selectedTime!.period == DayPeriod.am ? "AM" : "PM";

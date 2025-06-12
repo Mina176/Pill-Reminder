@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pill_reminder/constants.dart';
 import 'package:pill_reminder/views/addDoseVew/widgets/dose_count_item.dart';
 
 class DoseSection extends StatelessWidget {
@@ -14,10 +15,11 @@ class DoseSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Dose',
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900),
+        Padding(
+          padding: const EdgeInsets.only(left: 8),
+          child: Text('Dose:', style: kSubTitleStyle),
         ),
         SizedBox(
           height: 60,

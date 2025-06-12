@@ -3,8 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pill_reminder/constants.dart';
 import 'package:pill_reminder/views/addDoseVew/widgets/med_type_card.dart';
 
-class MedTypeSection extends StatelessWidget {
-  const MedTypeSection(
+class MedFormSection extends StatelessWidget {
+  const MedFormSection(
       {super.key, required this.selectedindex, required this.onChanged});
 
   final int selectedindex;
@@ -18,10 +18,14 @@ class MedTypeSection extends StatelessWidget {
       FontAwesomeIcons.syringe,
     ];
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Medication Form',
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900),
+        Padding(
+          padding: const EdgeInsets.only(left: 8.0),
+          child: Text(
+            'Medication Form:',
+            style: kSubTitleStyle,
+          ),
         ),
         SizedBox(
             height: 100,

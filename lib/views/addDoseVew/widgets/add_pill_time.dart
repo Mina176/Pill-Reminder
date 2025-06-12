@@ -2,29 +2,18 @@ import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
 
-class AddPillTime extends StatelessWidget {
-  const AddPillTime(
-      {super.key, required this.onTap, required this.displayedTime});
+class MedTime extends StatelessWidget {
+  const MedTime({super.key, required this.onTap, required this.displayedTime});
   final VoidCallback onTap;
   final String displayedTime;
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              width: 5,
-            ),
-            Text(
-              'Medicine Time',
-              style: TextStyle(
-                fontSize: 26,
-                fontWeight: FontWeight.w900,
-              ),
-            ),
-          ],
+        Padding(
+          padding: const EdgeInsets.only(left: 8),
+          child: Text('Medicine Time:', style: kSubTitleStyle),
         ),
         SizedBox(
           height: 10,
@@ -36,7 +25,7 @@ class AddPillTime extends StatelessWidget {
             children: [
               Text(
                 'My Med At ',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900),
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
               ),
               Container(
                 width: 85,
