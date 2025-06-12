@@ -37,11 +37,7 @@ class DoseCard extends StatelessWidget {
                   Row(
                     children: [
                       Icon(
-                        doseModel.form == DoseModel.
-                            ? FontAwesomeIcons.tablets
-                            : doseModel.form == DoseModel.formPill
-                                ? FontAwesomeIcons.pills
-                                : FontAwesomeIcons.syringe,
+                        formToIcon(doseModel.form),
                         color: kPrimaryColor,
                         size: 26,
                       ),
@@ -57,11 +53,11 @@ class DoseCard extends StatelessWidget {
                     height: 7,
                   ),
                   Text(
-                    'Dose: ${doseModel.dose} ${DoseModel.formToString(doseModel.form)}',
+                    'dose =  ${doseModel.dose.toString()}',
                     style: kFeaturesStyle,
                   ),
                   Text(
-                    'Featuers: $food',
+                    'food =  ${intFoodToString(doseModel.food)}',
                     style: kFeaturesStyle,
                   ),
                 ],
@@ -77,7 +73,7 @@ class DoseCard extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                    time,
+                    doseModel.time,
                     style: TextStyle(fontWeight: FontWeight.w800, fontSize: 16),
                   ),
                 ],
@@ -89,7 +85,35 @@ class DoseCard extends StatelessWidget {
     );
   }
 
-  
+  IconData formToIcon(int val) {
+    if (val == 0) {
+      return FontAwesomeIcons.tablets;
+    } else if (val == 1) {
+      return FontAwesomeIcons.pills;
+    } else {
+      return FontAwesomeIcons.syringe;
+    }
+  }
+
+  String intFormToString(int val) {
+    if (val == 0) {
+      return 'tablets';
+    } else if (val == 1) {
+      return 'pills';
+    } else {
+      return 'syringe';
+    }
+  }
+
+  String intFoodToString(int val) {
+    if (val == 0) {
+      return 'before Meal';
+    } else if (val == 1) {
+      return 'In Meal';
+    } else {
+      return 'After Meal';
+    }
+  }
 }
  
 

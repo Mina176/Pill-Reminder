@@ -32,28 +32,10 @@ class _DoseCardsListViewState extends State<DoseCardsListView> {
       child: ListView.builder(
           itemCount: doses.length,
           itemBuilder: (context, index) {
-            return Container();
+            return DoseCard(
+              doseModel: doses[index],
+            );
           }),
     ));
-  }
-}
-
-String intFormToString(int val) {
-  if (val == 0) {
-    return 'tablets';
-  } else if (val == 1) {
-    return 'pills';
-  } else {
-    return 'syringe';
-  }
-}
-
-String intFoodToString(int val) {
-  if (val == 0) {
-    return 'before Meal';
-  } else if (val == 1) {
-    return 'In Meal';
-  } else {
-    return 'After Meal';
   }
 }

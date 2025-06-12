@@ -13,3 +13,5 @@ const kSubTitleStyle = TextStyle(fontSize: 18, fontWeight: FontWeight.w700);
 
 const kFeaturesStyle = TextStyle(
     color: Color(0xFF999999), fontSize: 16, fontWeight: FontWeight.w400);
+
+const kDoseBox = 'doseBox';

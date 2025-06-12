@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 part 'dose_model.g.dart';
@@ -30,14 +28,4 @@ class DoseModel extends HiveObject {
     required this.duration,
     required this.time,
   });
-
- static IconData formToIcon(int val) {
-    if (val == 0) {
-      return FontAwesomeIcons.tablets;
-    } else if (val == 1) {
-      return FontAwesomeIcons.pills;
-    } else {
-      return FontAwesomeIcons.syringe;
-    }
-  }
 }
