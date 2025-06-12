@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import '../../../constants.dart';
 
 class MedTypeCard extends StatelessWidget {
   const MedTypeCard(
       {super.key,
-      required this.type,
       required this.onPressed,
-      required this.isSelected});
-  final Icon type;
+      required this.isSelected,
+      required this.icon,
+      required this.cardColor});
+  final Icon icon;
   final bool isSelected;
   final VoidCallback onPressed;
+  final Color cardColor;
 
   @override
   Widget build(BuildContext context) {
@@ -18,16 +19,20 @@ class MedTypeCard extends StatelessWidget {
       child: GestureDetector(
         onTap: onPressed,
         child: Container(
-          width: 120,
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: isSelected == true ? kPrimaryColor : kDisabledColor,
-              width: 3,
+            width: 120,
+            decoration: BoxDecoration(
+              color: cardColor,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black
+                      .withValues(alpha: 0.06), // very subtle shadow
+                  blurRadius: 8,
+                  offset: Offset(0, 8),
+                ),
+              ],
+              borderRadius: BorderRadius.circular(24),
             ),
-            borderRadius: BorderRadius.circular(24),
-          ),
-          child: Center(child: type),
-        ),
+            child: Center(child: icon)),
       ),
     );
   }

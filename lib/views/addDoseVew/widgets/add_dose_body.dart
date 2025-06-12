@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-  import 'package:pill_reminder/views/addDoseVew/widgets/med_dose_select_section.dart';
+import 'package:pill_reminder/views/addDoseVew/widgets/med_dose_select_section.dart';
 import 'add_med_name_section.dart';
 import 'add_pill_time.dart';
 import 'food_and_med_section.dart';
@@ -39,7 +39,7 @@ class _AddDoseBodyState extends State<AddDoseBody> {
         SizedBox(
           height: 10,
         ),
-        MedDoseSection(
+        DoseSection(
           selectedindex: selectedDose,
           onChanged: (value) {
             setState(() {
@@ -48,13 +48,23 @@ class _AddDoseBodyState extends State<AddDoseBody> {
           },
         ),
         SizedBox(
-          height: 30,
+          height: 10,
         ),
-        AddPillTime(onTap: showTimePicker),
+        FoodAndMedSection(
+          selectedindex: selectedFood,
+          onChanged: (value) {
+            setState(() {
+              selectedFood = value;
+            });
+          },
+        ),
         SizedBox(
           height: 10,
         ),
-        FoodAndMedSection()
+        AddPillTime(
+          onTap: showTimePicker,
+          displayedTime: formattedTime,
+        )
       ],
     );
   }
@@ -79,7 +89,7 @@ class _AddDoseBodyState extends State<AddDoseBody> {
                   0,
                   0,
                   selectedTime?.hour ?? DateTime.now().hour,
-                  selectedTime?.hour ?? DateTime.now().hour,
+                  selectedTime?.minute ?? DateTime.now().minute,
                 ),
                 mode: CupertinoDatePickerMode.time,
                 onDateTimeChanged: (newTime) {
@@ -107,5 +117,13 @@ class _AddDoseBodyState extends State<AddDoseBody> {
         ),
       ),
     );
+  }
+
+  String get formattedTime {
+    if (selectedTime == null) return "";
+    final hour = selectedTime!.hourOfPeriod.toString().padLeft(2, '0');
+    final minute = selectedTime!.minute.toString().padLeft(2, '0');
+    final period = selectedTime!.period == DayPeriod.am ? "AM" : "PM";
+    return "$hour:$minute $period";
   }
 }

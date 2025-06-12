@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:pill_reminder/constants.dart';
 import 'package:pill_reminder/views/addDoseVew/widgets/med_type_card.dart';
 
 class MedTypeSection extends StatelessWidget {
@@ -11,10 +12,10 @@ class MedTypeSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<Icon> typeIcons = const [
-      Icon(FontAwesomeIcons.tablets, size: 50),
-      Icon(FontAwesomeIcons.capsules, size: 50),
-      Icon(FontAwesomeIcons.syringe, size: 50),
+    final List<IconData> typeIcons = const [
+      FontAwesomeIcons.tablets,
+      FontAwesomeIcons.capsules,
+      FontAwesomeIcons.syringe,
     ];
     return Column(
       children: [
@@ -28,7 +29,14 @@ class MedTypeSection extends StatelessWidget {
               children: List.generate(typeIcons.length, (index) {
                 return Expanded(
                     child: MedTypeCard(
-                  type: typeIcons[index],
+                  cardColor:
+                      selectedindex == index ? kPrimaryColor : Colors.white,
+                  icon: Icon(
+                    typeIcons[index],
+                    size: 50,
+                    color:
+                        selectedindex == index ? Colors.white : kPrimaryColor,
+                  ),
                   onPressed: () {
                     onChanged(index);
                   },

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pill_reminder/views/addDoseVew/widgets/dose_count_item.dart';
 
-class MedDoseSection extends StatelessWidget {
-  const MedDoseSection({
+class DoseSection extends StatelessWidget {
+  const DoseSection({
     super.key,
     required this.selectedindex,
     required this.onChanged,
@@ -39,18 +39,3 @@ class MedDoseSection extends StatelessWidget {
     );
   }
 }
-
-
-// ListView.builder(
-//             scrollDirection: Axis.horizontal,
-//             itemCount: 3,
-//             itemBuilder: (context, index) {
-//               return DoseCountItem(
-//                 count: index,
-//                 onPressed: () {
-//                   onChanged(index);
-//                 },
-//                 isSelected: selectedindex == index,
-//               );
-//             },
-//           ),
