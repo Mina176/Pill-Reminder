@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:pill_reminder/models/dose_model.dart';
 
+import '../../../constants.dart';
 import 'dose_card.dart';
 
 class DoseCardsListView extends StatefulWidget {
@@ -61,7 +63,7 @@ class _DoseCardsListViewState extends State<DoseCardsListView> {
 
   takePill(int index) {
     setState(() {
-      widget.alldoses!.removeAt(index);
+      Hive.box<DoseModel>(kDoseBox).deleteAt(index);
     });
   }
 }
