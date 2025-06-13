@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pill_reminder/constants.dart';
 import 'package:pill_reminder/models/dose_model.dart';
 
@@ -8,8 +7,8 @@ class DoseCard extends StatelessWidget {
     super.key,
     required this.doseModel,
   });
-
   final DoseModel doseModel;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -30,11 +29,13 @@ class DoseCard extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Icon(
                         formToIcon(doseModel.form),
@@ -63,14 +64,14 @@ class DoseCard extends StatelessWidget {
                 ],
               ),
               Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  IconButton(
-                    icon: Icon(Icons.more_vert,
-                        size: 32, color: Colors.black.withAlpha(140)),
-                    onPressed: () {},
+                  Icon(
+                    Icons.arrow_back_ios_new_rounded,
+                    color: kDisabledColor,
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 15,
                   ),
                   Text(
                     doseModel.time,
@@ -84,40 +85,4 @@ class DoseCard extends StatelessWidget {
       ),
     );
   }
-
-  IconData formToIcon(int val) {
-    if (val == 0) {
-      return FontAwesomeIcons.tablets;
-    } else if (val == 1) {
-      return FontAwesomeIcons.pills;
-    } else {
-      return FontAwesomeIcons.syringe;
-    }
-  }
-
-  String intFormToString(int val) {
-    if (val == 0) {
-      return 'tablets';
-    } else if (val == 1) {
-      return 'pills';
-    } else {
-      return 'syringe';
-    }
-  }
-
-  String intFoodToString(int val) {
-    if (val == 0) {
-      return 'before Meal';
-    } else if (val == 1) {
-      return 'In Meal';
-    } else {
-      return 'After Meal';
-    }
-  }
 }
- 
-
-
-// Padding(
-      // padding: const EdgeInsets.all(8.0),
-      // child: 

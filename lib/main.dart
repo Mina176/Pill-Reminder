@@ -7,8 +7,8 @@ import 'views/homeView/home_view.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  await Hive.openBox(kDoseBox);
   Hive.registerAdapter(DoseModelAdapter());
+  await Hive.openBox<DoseModel>(kDoseBox);
 
   runApp(const PillReminder());
 }

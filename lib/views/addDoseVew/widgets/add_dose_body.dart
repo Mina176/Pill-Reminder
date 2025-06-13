@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:pill_reminder/models/dose_model.dart';
 import 'package:pill_reminder/views/addDoseVew/widgets/med_dose_select_section.dart';
 import '../../../constants.dart';
 import 'add_med_name_section.dart';
@@ -20,10 +22,10 @@ class AddDoseBody extends StatefulWidget {
 class _AddDoseBodyState extends State<AddDoseBody> {
   String? medName;
   int selectedDose = 0;
-  int selectedType = 0;
+  int selectedForm = 0;
   int selectedFood = 0;
 
-  bool? remind = true;
+  bool remind = true;
 
   TimeOfDay? selectedTime;
 
@@ -54,10 +56,10 @@ class _AddDoseBodyState extends State<AddDoseBody> {
             },
           ),
           MedFormSection(
-            selectedindex: selectedType,
+            selectedindex: selectedForm,
             onChanged: (value) {
               setState(() {
-                selectedType = value;
+                selectedForm = value;
               });
             },
           ),
@@ -95,7 +97,7 @@ class _AddDoseBodyState extends State<AddDoseBody> {
             height: 10,
           ),
           RemindMeSection(
-            value: remind!,
+            value: remind,
             onChanged: (value) {
               setState(() {
                 remind = value;
@@ -108,15 +110,36 @@ class _AddDoseBodyState extends State<AddDoseBody> {
             onTap: () {
               if (formKey.currentState!.validate()) {
                 formKey.currentState!.save();
+                addDose(
+                  DoseModel(
+                    remind: remind,
+                    medName: medName!,
+                    form: selectedForm,
+                    dose: selectedDose,
+                    food: selectedFood,
+                    duration: selectedDuration,
+                    time: formatTime(selectedTime),
+                  ),
+                );
               } else {
                 autovalidateMode = AutovalidateMode.always;
-                setState(() {});
               }
+              fetchAllDoses();
+              
+              Navigator.of(context).pop();
             },
           ),
         ],
       ),
     );
+  }
+
+  String formatTime(TimeOfDay? selectedTime) {
+    if (selectedTime == null) return "9:00 AM";
+    final hour = selectedTime.hourOfPeriod.toString();
+    final minute = selectedTime.minute.toString().padLeft(2, '0');
+    final period = selectedTime.period == DayPeriod.am ? "AM" : "PM";
+    return "$hour:$minute $period";
   }
 
   void showDurationPicker() {

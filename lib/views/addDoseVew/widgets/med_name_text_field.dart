@@ -15,6 +15,7 @@ class MedNameTextField extends StatelessWidget {
         if (value?.isEmpty ?? true) {
           return 'Field is required';
         }
+        return null;
       },
       cursorColor: kPrimaryColor,
       decoration: InputDecoration(
