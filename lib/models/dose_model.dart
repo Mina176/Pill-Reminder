@@ -18,8 +18,11 @@ class DoseModel extends HiveObject {
   final String time;
   @HiveField(6)
   final bool remind;
+  @HiveField(7)
+  bool? isTaken;
 
   DoseModel({
+    this.isTaken,
     required this.remind,
     required this.medName,
     required this.form,

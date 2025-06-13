@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:pill_reminder/models/dose_model.dart';
 import 'package:pill_reminder/views/addDoseVew/widgets/med_dose_select_section.dart';
 import '../../../constants.dart';
@@ -125,7 +124,7 @@ class _AddDoseBodyState extends State<AddDoseBody> {
                 autovalidateMode = AutovalidateMode.always;
               }
               fetchAllDoses();
-              
+
               Navigator.of(context).pop();
             },
           ),

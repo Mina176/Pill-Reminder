@@ -50,14 +50,4 @@ class _HomeViewBodyState extends State<HomeViewBody> {
   fetchAllDoses() {
     alldoses = Hive.box<DoseModel>(kDoseBox).values.toList();
   }
-
-  onSelectedMenuPopUp(String val, int index) {
-    if (val == 'delete') {
-      alldoses!.elementAt(1).delete();
-    } else if (val == 'take') {
-      // Call your take pill function here
-    } else if (val == 'edit') {
-      // Call your edit function here
-    }
-  }
 }
