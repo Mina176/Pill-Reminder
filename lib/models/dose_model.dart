@@ -22,7 +22,7 @@ class DoseModel extends HiveObject {
   bool? isTaken;
 
   DoseModel({
-    required this.isTaken,
+    this.isTaken = false,
     required this.remind,
     required this.medName,
     required this.form,

@@ -26,15 +26,14 @@ class FloatingActionButton extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => AddDoseView(),
-            ));
+          context,
+          MaterialPageRoute(builder: (context) => AddDoseView()),
+        );
       },
       child: FittedBox(
         child: Container(
           decoration: BoxDecoration(
-            color: kPrimaryColor,
+            color: kBtnColor,
             borderRadius: BorderRadius.circular(32),
           ),
           child: Padding(

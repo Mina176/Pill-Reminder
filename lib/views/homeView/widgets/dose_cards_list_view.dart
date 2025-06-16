@@ -46,49 +46,13 @@ class _DoseCardsListViewState extends State<DoseCardsListView> {
                           motion: DrawerMotion(),
                           children: [
                             SlidableAction(
-                              onPressed: (context) => showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return CupertinoAlertDialog(
-                                    content: Text(
-                                        'Are You Sure you want to delete Medication?'),
-                                    actions: [
-                                      GestureDetector(
-                                        onTap: () => Navigator.pop(context),
-                                        child: Center(
-                                          child: Text(
-                                            'No',
-                                            style:
-                                                TextStyle(color: Colors.black),
-                                          ),
-                                        ),
-                                      ),
-                                      GestureDetector(
-                                        onTap: () {
-                                          Navigator.pop(context);
-                                          removeMed(index);
-                                        },
-                                        child: Center(
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Text(
-                                              'Yes',
-                                              style: TextStyle(
-                                                  color: Colors.black),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              ),
-                              backgroundColor: Colors.red,
-                              icon: FontAwesomeIcons.xmark,
+                              onPressed: (context) => toggleTakeMed(index),
+                              backgroundColor: Colors.green,
+                              icon: FontAwesomeIcons.check,
                               borderRadius: BorderRadius.only(
                                   topRight: Radius.circular(16),
                                   bottomRight: Radius.circular(16)),
-                              label: 'Remove Med',
+                              label: 'Take Med',
                             ),
                           ],
                         ),
@@ -110,9 +74,17 @@ class _DoseCardsListViewState extends State<DoseCardsListView> {
           ));
   }
 
-  removeMed(int index) {
-    setState(() {
-      Hive.box<DoseModel>(kDoseBox).deleteAt(index);
-    });
+  void toggleTakeMed(int index) {
+    final dose = Hive.box<DoseModel>(kDoseBox).getAt(index);
+
+    if (dose != null && dose.isTaken == false) {
+      dose.isTaken = true;
+      dose.save();
+      setState(() {});
+    } else if (dose != null && dose.isTaken == true) {
+      dose.isTaken = false;
+      dose.save();
+      setState(() {});
+    }
   }
 }
