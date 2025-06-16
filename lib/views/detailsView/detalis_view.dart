@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pill_reminder/constants.dart';
 import 'package:pill_reminder/models/dose_model.dart';
 
-import 'widgets/detalis_view_body.dart';
+import 'widgets/details_view_body.dart';
 
 class DetalisView extends StatelessWidget {
   const DetalisView({super.key, required this.dose});
@@ -20,7 +20,7 @@ class DetalisView extends StatelessWidget {
         ),
       ),
       body: SafeArea(
-        child: DetalisViewBody(
+        child: DetailsViewBody(
           dose: dose,
         ),
       ),

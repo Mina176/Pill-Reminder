@@ -4,7 +4,7 @@ import 'package:pill_reminder/models/dose_model.dart';
 import 'package:pill_reminder/views/addDoseVew/widgets/med_dose_select_section.dart';
 import '../../../constants.dart';
 import 'add_med_name_section.dart';
-import 'add_pill_btn.dart';
+import 'custom_btn.dart';
 import 'add_pill_time.dart';
 import 'food_and_med_section.dart';
 import 'med_duration_sec.dart';
@@ -114,7 +114,15 @@ class _AddDoseBodyState extends State<AddDoseBody> {
         ),
         Spacer(),
         CustomBtn(
-          label: 'Add Medicine',
+          widget: Text(
+            'Add Medicine',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+              fontWeight: FontWeight.w700,
+              letterSpacing: 0.2,
+            ),
+          ),
           onTap: () {
             if (controller.text.isNotEmpty) {
               setState(() {
@@ -122,14 +130,15 @@ class _AddDoseBodyState extends State<AddDoseBody> {
               });
               addDose(
                 DoseModel(
-                    remind: remind,
-                    medName: medName!,
-                    form: selectedForm,
-                    dose: selectedDose,
-                    food: selectedFood,
-                    duration: selectedDuration,
-                    time: formatTime(selectedTime),
-                    isTaken: false),
+                  remind: remind,
+                  medName: medName!,
+                  form: selectedForm,
+                  dose: selectedDose,
+                  food: selectedFood,
+                  duration: selectedDuration,
+                  time: formatTime(selectedTime),
+                  isTaken: false,
+                ),
               );
               fetchAllDoses();
               Navigator.of(context).pop();

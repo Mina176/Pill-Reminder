@@ -22,7 +22,6 @@ class MedTypeCard extends StatelessWidget {
       child: GestureDetector(
         onTap: onPressed,
         child: Container(
-          height: 120,
           width: 120,
           decoration: BoxDecoration(
             color: cardColor,
@@ -31,7 +30,6 @@ class MedTypeCard extends StatelessWidget {
                 color:
                     Colors.black.withValues(alpha: 0.06), // very subtle shadow
                 blurRadius: 8,
-                offset: Offset(0, 8),
               ),
             ],
             borderRadius: BorderRadius.circular(24),
@@ -39,6 +37,9 @@ class MedTypeCard extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              SizedBox(
+                height: 5,
+              ),
               Icon(
                 icon,
                 size: 32,
@@ -54,6 +55,9 @@ class MedTypeCard extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 20,
                     color: isSelected ? Colors.white : kPrimaryColor),
+              ),
+              SizedBox(
+                height: 5,
               ),
             ],
           ),

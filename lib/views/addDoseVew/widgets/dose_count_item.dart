@@ -31,7 +31,6 @@ class DoseCountItem extends StatelessWidget {
                   color: Colors.black
                       .withValues(alpha: 0.06), // very subtle shadow
                   blurRadius: 8,
-                  offset: Offset(0, 8),
                 ),
               ]),
           child: Center(

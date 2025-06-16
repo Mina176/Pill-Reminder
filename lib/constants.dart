@@ -17,6 +17,13 @@ const kSubTitleStyle = TextStyle(fontSize: 18, fontWeight: FontWeight.w700);
 const kFeaturesStyle = TextStyle(
     color: Color(0xFF999999), fontSize: 16, fontWeight: FontWeight.w400);
 
+const kBtnTextStyle = TextStyle(
+  color: Colors.white,
+  fontSize: 18,
+  fontWeight: FontWeight.w700,
+  letterSpacing: 0.2,
+);
+
 const kDoseBox = 'doseBox';
 
 const String kHomeView = 'Home view';
@@ -56,8 +63,6 @@ String intFoodToString(int val) {
   }
 }
 
-
-
 addDose(DoseModel dose) async {
   var doseBox = Hive.box<DoseModel>(kDoseBox);
   await doseBox.add(dose);
@@ -87,4 +92,3 @@ final List<String> durations = [
   '105 days',
   '120 days',
 ];
-

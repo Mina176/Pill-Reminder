@@ -34,7 +34,7 @@ class _CustomAnimatedBtnState extends State<CustomAnimatedBtn> {
           child: widget.dose.isTaken ?? false
               ? FittedBox(
                   child: Padding(
-                    padding: const EdgeInsets.all(14),
+                    padding: const EdgeInsets.symmetric(vertical: 12),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -56,7 +56,7 @@ class _CustomAnimatedBtnState extends State<CustomAnimatedBtn> {
                   ),
                 )
               : Padding(
-                  padding: const EdgeInsets.all(14),
+                  padding: const EdgeInsets.all(12),
                   child: Text(
                     'Take Medicine',
                     style: TextStyle(
