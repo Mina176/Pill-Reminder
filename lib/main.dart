@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:pill_reminder/models/dose_model.dart';
+import 'package:pill_reminder/views/addDoseVew/add_dose_view.dart';
+import 'package:pill_reminder/views/detailsView/detalis_view.dart';
 import 'constants.dart';
 import 'views/homeView/home_view.dart';
 

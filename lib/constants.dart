@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:pill_reminder/views/homeView/home_view.dart';
 import 'models/dose_model.dart';
 
 const kDisabledColor = Color.fromARGB(255, 143, 143, 143);
@@ -18,6 +19,10 @@ const kFeaturesStyle = TextStyle(
     color: Color(0xFF999999), fontSize: 16, fontWeight: FontWeight.w400);
 
 const kDoseBox = 'doseBox';
+
+const String kHomeView = 'Home view';
+const String kAddDoseView = 'Add dose view';
+const String kDetailsView = 'Details view';
 
 const TextStyle kPopUpMenuStyle =
     TextStyle(fontSize: 16, fontWeight: FontWeight.w400);
@@ -61,7 +66,7 @@ List<DoseModel> fetchAllDoses() {
   List<DoseModel>? alldoses;
   var dosesBox = Hive.box<DoseModel>(kDoseBox);
   alldoses = dosesBox.values.toList();
-  return alldoses ;
+  return alldoses;
 }
 
 String formatTime(TimeOfDay? selectedTime) {
