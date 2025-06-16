@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:pill_reminder/constants.dart';
 
 class FoodAndMedSection extends StatelessWidget {
-  const FoodAndMedSection(
-      {super.key, required this.selectedindex, required this.onChanged});
+  const FoodAndMedSection({
+    super.key,
+    required this.selectedindex,
+    required this.onChanged,
+  });
   final int selectedindex;
   final ValueChanged<int> onChanged;
 
@@ -24,12 +27,11 @@ class FoodAndMedSection extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: List.generate(3, (index) {
-            return FoodCard(
-              text: foodAndMed[index],
-              isSelected: selectedindex == index,
-              onPressed: () {
-                onChanged(index);
-              },
+            return Expanded(
+              child: FoodCard(
+                  text: foodAndMed[index],
+                  isSelected: selectedindex == index,
+                  onPressed: () => onChanged(index)),
             );
           }),
         )
@@ -54,8 +56,7 @@ class FoodCard extends StatelessWidget {
       child: GestureDetector(
         onTap: onPressed,
         child: Container(
-          width: 100,
-          height: 60,
+          height: 50,
           decoration: BoxDecoration(
               color: isSelected ? kPrimaryColor : Colors.white,
               borderRadius: BorderRadius.circular(8),
@@ -70,8 +71,10 @@ class FoodCard extends StatelessWidget {
             child: Text(
               text,
               style: TextStyle(
-                  color: isSelected ? Colors.white : Colors.black,
-                  fontWeight: FontWeight.w400),
+                color: isSelected ? Colors.white : Colors.black,
+                fontWeight: FontWeight.w400,
+                fontSize: 16,
+              ),
             ),
           ),
         ),

@@ -3,20 +3,21 @@ import 'package:flutter/material.dart';
 import '../../../constants.dart';
 
 class MedNameTextField extends StatelessWidget {
-  const MedNameTextField({super.key, this.onSaved});
+  const MedNameTextField(
+      {super.key,
+      required this.controller,
+      required this.autovalidateMode,
+    required  this.validator});
 
-  final void Function(String?)? onSaved;
-
+  final TextEditingController controller;
+  final AutovalidateMode autovalidateMode;
+  final String? Function(String?) validator;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      onSaved: onSaved,
-      validator: (value) {
-        if (value?.isEmpty ?? true) {
-          return 'Field is required';
-        }
-        return null;
-      },
+      controller: controller,
+      validator: validator,
+      autovalidateMode: autovalidateMode,
       cursorColor: kPrimaryColor,
       decoration: InputDecoration(
         hintText: 'Medication Name',

@@ -21,6 +21,8 @@ class _HomeViewBodyState extends State<HomeViewBody> {
     super.initState();
   }
 
+  final ScrollController controller = ScrollController();
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -45,9 +47,5 @@ class _HomeViewBodyState extends State<HomeViewBody> {
     );
   }
 
-  List<DoseModel>? alldoses;
-  final ScrollController controller = ScrollController();
-  fetchAllDoses() {
-    alldoses = Hive.box<DoseModel>(kDoseBox).values.toList();
-  }
+  
 }

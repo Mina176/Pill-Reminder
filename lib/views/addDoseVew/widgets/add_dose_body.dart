@@ -40,105 +40,116 @@ class _AddDoseBodyState extends State<AddDoseBody> {
     '120 days',
   ];
 
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  late TextEditingController controller;
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
-  @override
-  Widget build(BuildContext context) {
-    return Form(
-      key: formKey,
-      child: Column(
-        children: [
-          Text('Add Medication', style: kTitleStyle),
-          AddMedNameSection(
-            onSaved: (value) {
-              medName = value;
-            },
-          ),
-          MedFormSection(
-            selectedindex: selectedForm,
-            onChanged: (value) {
-              setState(() {
-                selectedForm = value;
-              });
-            },
-          ),
-          SizedBox(
-            height: 5,
-          ),
-          DoseSection(
-            selectedindex: selectedDose,
-            onChanged: (value) {
-              setState(() {
-                selectedDose = value;
-              });
-            },
-          ),
-          SizedBox(
-            height: 5,
-          ),
-          FoodAndMedSection(
-            selectedindex: selectedFood,
-            onChanged: (value) {
-              setState(() {
-                selectedFood = value;
-              });
-            },
-          ),
-          MedDurationSec(
-            onTap: showDurationPicker,
-            displayedDuration: durations[selectedDuration],
-          ),
-          MedTime(
-            onTap: showTimePicker,
-            displayedTime: formattedTime,
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          RemindMeSection(
-            value: remind,
-            onChanged: (value) {
-              setState(() {
-                remind = value;
-              });
-            },
-          ),
-          Spacer(),
-          CustomBtn(
-            label: 'Add Medicine',
-            onTap: () {
-              if (formKey.currentState!.validate()) {
-                formKey.currentState!.save();
-                addDose(
-                  DoseModel(
-                    remind: remind,
-                    medName: medName!,
-                    form: selectedForm,
-                    dose: selectedDose,
-                    food: selectedFood,
-                    duration: selectedDuration,
-                    time: formatTime(selectedTime),
-                  ),
-                );
-              } else {
-                autovalidateMode = AutovalidateMode.always;
-              }
-              fetchAllDoses();
 
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
-      ),
-    );
+  @override
+  void initState() {
+    super.initState();
+    controller = TextEditingController();
   }
 
-  String formatTime(TimeOfDay? selectedTime) {
-    if (selectedTime == null) return "9:00 AM";
-    final hour = selectedTime.hourOfPeriod.toString();
-    final minute = selectedTime.minute.toString().padLeft(2, '0');
-    final period = selectedTime.period == DayPeriod.am ? "AM" : "PM";
-    return "$hour:$minute $period";
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text('Add Medication', style: kTitleStyle),
+        AddMedNameSection(
+          controller: controller,
+          validator: (value) {
+            if (value?.isEmpty ?? true) {
+              return 'Field is required';
+            } else {
+              return null;
+            }
+          },
+          autovalidateMode: autovalidateMode,
+        ),
+        MedFormSection(
+          selectedindex: selectedForm,
+          onChanged: (value) {
+            setState(() {
+              selectedForm = value;
+            });
+          },
+        ),
+        SizedBox(
+          height: 5,
+        ),
+        DoseSection(
+          selectedindex: selectedDose,
+          onChanged: (value) {
+            setState(() {
+              selectedDose = value;
+            });
+          },
+        ),
+        SizedBox(
+          height: 5,
+        ),
+        FoodAndMedSection(
+          selectedindex: selectedFood,
+          onChanged: (value) {
+            setState(() {
+              selectedFood = value;
+            });
+          },
+        ),
+        MedDurationSec(
+          onTap: showDurationPicker,
+          displayedDuration: durations[selectedDuration],
+        ),
+        MedTime(
+          onTap: showTimePicker,
+          displayedTime: formatTime(selectedTime),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        RemindMeSection(
+          value: remind,
+          onChanged: (value) {
+            setState(() {
+              remind = value;
+            });
+          },
+        ),
+        Spacer(),
+        CustomBtn(
+          label: 'Add Medicine',
+          onTap: () {
+            if (controller.text.isNotEmpty) {
+              setState(() {
+                medName = controller.text;
+              });
+              addDose(
+                DoseModel(
+                  remind: remind,
+                  medName: medName!,
+                  form: selectedForm,
+                  dose: selectedDose,
+                  food: selectedFood,
+                  duration: selectedDuration,
+                  time: formatTime(selectedTime),
+                ),
+              );
+              fetchAllDoses();
+              Navigator.of(context).pop();
+              controller.clear();
+            } else {
+              autovalidateMode = AutovalidateMode.always;
+              setState(() {});
+            }
+          },
+        ),
+      ],
+    );
   }
 
   void showDurationPicker() {
@@ -158,7 +169,7 @@ class _AddDoseBodyState extends State<AddDoseBody> {
                 scrollController: FixedExtentScrollController(
                   initialItem: selectedDuration,
                 ),
-                itemExtent: 30,
+                itemExtent: 35,
                 onSelectedItemChanged: (int value) {
                   setState(() {
                     selectedDuration = value;
@@ -205,8 +216,8 @@ class _AddDoseBodyState extends State<AddDoseBody> {
                   0,
                   0,
                   0,
-                  selectedTime?.hour ?? 9,
-                  selectedTime?.minute ?? 00,
+                  selectedTime?.hour ?? DateTime.now().hour,
+                  selectedTime?.minute ?? DateTime.now().minute,
                 ),
                 mode: CupertinoDatePickerMode.time,
                 onDateTimeChanged: (newTime) {
@@ -234,13 +245,5 @@ class _AddDoseBodyState extends State<AddDoseBody> {
         ),
       ),
     );
-  }
-
-  String get formattedTime {
-    if (selectedTime == null) return "9:00 AM";
-    final hour = selectedTime!.hourOfPeriod.toString();
-    final minute = selectedTime!.minute.toString().padLeft(2, '0');
-    final period = selectedTime!.period == DayPeriod.am ? "AM" : "PM";
-    return "$hour:$minute $period";
   }
 }

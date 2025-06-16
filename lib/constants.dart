@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-
 import 'models/dose_model.dart';
 
 const kDisabledColor = Color.fromARGB(255, 143, 143, 143);
@@ -58,9 +57,17 @@ addDose(DoseModel dose) async {
   await doseBox.add(dose);
 }
 
-fetchAllDoses() {
+List<DoseModel> fetchAllDoses() {
   List<DoseModel>? alldoses;
   var dosesBox = Hive.box<DoseModel>(kDoseBox);
   alldoses = dosesBox.values.toList();
-  print(alldoses);
+  return alldoses ;
+}
+
+String formatTime(TimeOfDay? selectedTime) {
+  if (selectedTime == null) return "9:00 AM";
+  final hour = selectedTime.hourOfPeriod.toString();
+  final minute = selectedTime.minute.toString().padLeft(2, '0');
+  final period = selectedTime.period == DayPeriod.am ? "AM" : "PM";
+  return "$hour:$minute $period";
 }

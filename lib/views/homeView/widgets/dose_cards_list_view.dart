@@ -34,7 +34,6 @@ class _DoseCardsListViewState extends State<DoseCardsListView> {
               child: ListView.separated(
                   separatorBuilder: (context, index) => SizedBox(height: 15),
                   controller: widget.controller,
-                  reverse: true,
                   itemCount: widget.alldoses!.length,
                   itemBuilder: (context, index) {
                     return Slidable(

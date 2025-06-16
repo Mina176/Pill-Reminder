@@ -4,8 +4,15 @@ import '../../../constants.dart';
 import 'med_name_text_field.dart';
 
 class AddMedNameSection extends StatelessWidget {
-  const AddMedNameSection({super.key, this.onSaved});
-  final void Function(String?)? onSaved;
+  const AddMedNameSection({
+    super.key,
+    required this.controller,
+    required this.autovalidateMode,
+    required this.validator,
+  });
+  final TextEditingController controller;
+  final String? Function(String?) validator;
+  final AutovalidateMode autovalidateMode;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -21,7 +28,9 @@ class AddMedNameSection extends StatelessWidget {
         SizedBox(
           height: 70,
           child: MedNameTextField(
-            onSaved: onSaved,
+            controller: controller,
+            validator: validator,
+            autovalidateMode: autovalidateMode,
           ),
         ),
       ],
