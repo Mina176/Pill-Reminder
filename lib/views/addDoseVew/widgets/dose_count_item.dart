@@ -5,12 +5,12 @@ class DoseCountItem extends StatelessWidget {
   const DoseCountItem({
     super.key,
     required this.count,
-    required this.onPressed,
+    this.onPressed,
     required this.isSelected,
   });
   final int count;
-  final bool isSelected;
-  final VoidCallback onPressed;
+  final bool? isSelected;
+  final VoidCallback? onPressed;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -20,9 +20,9 @@ class DoseCountItem extends StatelessWidget {
         child: Container(
           width: MediaQuery.of(context).size.width / 3,
           decoration: BoxDecoration(
-              color: isSelected ? kPrimaryColor : Colors.white,
+              color: isSelected ?? false ? kPrimaryColor : Colors.white,
               border: Border.all(
-                color: isSelected ? kPrimaryColor : kDisabledColor,
+                color: isSelected ?? false ? kPrimaryColor : kDisabledColor,
                 width: 1.25,
               ),
               borderRadius: BorderRadius.circular(24),
@@ -38,7 +38,7 @@ class DoseCountItem extends StatelessWidget {
             child: Text(
               '${count + 1}',
               style: TextStyle(
-                  color: isSelected ? Colors.white : kPrimaryColor,
+                  color: isSelected ?? false ? Colors.white : kPrimaryColor,
                   fontSize: 18,
                   fontWeight: FontWeight.w900),
             ),
