@@ -55,13 +55,14 @@ class _DoseCardsListViewState extends State<DoseCardsListView> {
                           ],
                         ),
                         child: DoseCard(
-                          doseModel: widget.alldoses![index],
+                          dose: widget.alldoses![index],
                           onTap: () {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => DetalisView(dose: widget.alldoses![index],)
-                                ));
+                                    builder: (context) => DetalisView(
+                                          dose: widget.alldoses![index],
+                                        )));
                           },
                         ));
                   }),

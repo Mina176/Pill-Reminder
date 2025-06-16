@@ -22,7 +22,7 @@ class DoseSection extends StatelessWidget {
           child: Text('Dose:', style: kSubTitleStyle),
         ),
         SizedBox(
-          height: 60,
+          height: 50,
           child: Row(
             children: List.generate(3, (index) {
               return Expanded(

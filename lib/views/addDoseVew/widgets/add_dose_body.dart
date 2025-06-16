@@ -30,16 +30,6 @@ class _AddDoseBodyState extends State<AddDoseBody> {
 
   int selectedDuration = 2;
 
-  final List<String> durations = [
-    '30 days',
-    '45 days',
-    '60 days',
-    '75 days',
-    '90 days',
-    '105 days',
-    '120 days',
-  ];
-
   late TextEditingController controller;
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
 
@@ -132,14 +122,14 @@ class _AddDoseBodyState extends State<AddDoseBody> {
               });
               addDose(
                 DoseModel(
-                  remind: remind,
-                  medName: medName!,
-                  form: selectedForm,
-                  dose: selectedDose,
-                  food: selectedFood,
-                  duration: selectedDuration,
-                  time: formatTime(selectedTime),
-                ),
+                    remind: remind,
+                    medName: medName!,
+                    form: selectedForm,
+                    dose: selectedDose,
+                    food: selectedFood,
+                    duration: selectedDuration,
+                    time: formatTime(selectedTime),
+                    isTaken: false),
               );
               fetchAllDoses();
               Navigator.of(context).pop();

@@ -18,21 +18,28 @@ class DoseCountItem extends StatelessWidget {
       child: GestureDetector(
         onTap: onPressed,
         child: Container(
-          width: 120,
+          width: MediaQuery.of(context).size.width / 3,
           decoration: BoxDecoration(
-            color: isSelected ? kPrimaryColor : Colors.white,
-            border: Border.all(
-              color: isSelected ? kPrimaryColor : kDisabledColor,
-              width: 2,
-            ),
-            borderRadius: BorderRadius.circular(24),
-          ),
+              color: isSelected ? kPrimaryColor : Colors.white,
+              border: Border.all(
+                color: isSelected ? kPrimaryColor : kDisabledColor,
+                width: 1.25,
+              ),
+              borderRadius: BorderRadius.circular(24),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black
+                      .withValues(alpha: 0.06), // very subtle shadow
+                  blurRadius: 8,
+                  offset: Offset(0, 8),
+                ),
+              ]),
           child: Center(
             child: Text(
               '${count + 1}',
               style: TextStyle(
-                  color: isSelected ? Colors.white : Colors.black,
-                  fontSize: 16,
+                  color: isSelected ? Colors.white : kPrimaryColor,
+                  fontSize: 18,
                   fontWeight: FontWeight.w900),
             ),
           ),

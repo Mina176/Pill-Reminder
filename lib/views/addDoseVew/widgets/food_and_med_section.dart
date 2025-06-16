@@ -41,14 +41,15 @@ class FoodAndMedSection extends StatelessWidget {
 }
 
 class FoodCard extends StatelessWidget {
-  const FoodCard(
-      {super.key,
-      required this.text,
-      required this.isSelected,
-      required this.onPressed});
+  const FoodCard({
+    super.key,
+    required this.text,
+    required this.onPressed,
+    required this.isSelected,
+  });
   final String text;
-  final bool isSelected;
   final VoidCallback onPressed;
+  final bool isSelected;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -71,8 +72,8 @@ class FoodCard extends StatelessWidget {
             child: Text(
               text,
               style: TextStyle(
-                color: isSelected ? Colors.white : Colors.black,
-                fontWeight: FontWeight.w400,
+                color: isSelected ? Colors.white : kPrimaryColor,
+                fontWeight: FontWeight.w600,
                 fontSize: 16,
               ),
             ),

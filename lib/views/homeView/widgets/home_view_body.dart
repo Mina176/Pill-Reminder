@@ -40,13 +40,10 @@ class _HomeViewBodyState extends State<HomeViewBody> {
             return DoseCardsListView(
               alldoses: alldoses,
               controller: controller,
-              
             );
           },
         ),
       ],
     );
   }
-
-  
 }

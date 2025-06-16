@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:pill_reminder/views/homeView/home_view.dart';
 import 'models/dose_model.dart';
 
 const kDisabledColor = Color.fromARGB(255, 143, 143, 143);
@@ -57,6 +56,8 @@ String intFoodToString(int val) {
   }
 }
 
+
+
 addDose(DoseModel dose) async {
   var doseBox = Hive.box<DoseModel>(kDoseBox);
   await doseBox.add(dose);
@@ -76,3 +77,13 @@ String formatTime(TimeOfDay? selectedTime) {
   final period = selectedTime.period == DayPeriod.am ? "AM" : "PM";
   return "$hour:$minute $period";
 }
+
+final List<String> durations = [
+  '30 days',
+  '45 days',
+  '60 days',
+  '75 days',
+  '90 days',
+  '105 days',
+  '120 days',
+];
