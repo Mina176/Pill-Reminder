@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:pill_reminder/models/dose_model.dart';
 import 'package:pill_reminder/views/detailsView/detalis_view.dart';
@@ -40,17 +42,53 @@ class _DoseCardsListViewState extends State<DoseCardsListView> {
                     return Slidable(
                         closeOnScroll: true,
                         endActionPane: ActionPane(
-                          extentRatio: 0.3,
+                          extentRatio: 0.31,
                           motion: DrawerMotion(),
                           children: [
                             SlidableAction(
-                              onPressed: (context) => takePill(index),
-                              backgroundColor: Colors.green,
-                              icon: Icons.check,
+                              onPressed: (context) => showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return CupertinoAlertDialog(
+                                    content: Text(
+                                        'Are You Sure you want to delete Medication?'),
+                                    actions: [
+                                      GestureDetector(
+                                        onTap: () => Navigator.pop(context),
+                                        child: Center(
+                                          child: Text(
+                                            'No',
+                                            style:
+                                                TextStyle(color: Colors.black),
+                                          ),
+                                        ),
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          Navigator.pop(context);
+                                          removeMed(index);
+                                        },
+                                        child: Center(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Text(
+                                              'Yes',
+                                              style: TextStyle(
+                                                  color: Colors.black),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              ),
+                              backgroundColor: Colors.red,
+                              icon: FontAwesomeIcons.xmark,
                               borderRadius: BorderRadius.only(
                                   topRight: Radius.circular(16),
                                   bottomRight: Radius.circular(16)),
-                              label: 'Take Pill',
+                              label: 'Remove Med',
                             ),
                           ],
                         ),
@@ -58,11 +96,13 @@ class _DoseCardsListViewState extends State<DoseCardsListView> {
                           dose: widget.alldoses![index],
                           onTap: () {
                             Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => DetalisView(
-                                          dose: widget.alldoses![index],
-                                        )));
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => DetalisView(
+                                  dose: widget.alldoses![index],
+                                ),
+                              ),
+                            );
                           },
                         ));
                   }),
@@ -70,7 +110,7 @@ class _DoseCardsListViewState extends State<DoseCardsListView> {
           ));
   }
 
-  takePill(int index) {
+  removeMed(int index) {
     setState(() {
       Hive.box<DoseModel>(kDoseBox).deleteAt(index);
     });

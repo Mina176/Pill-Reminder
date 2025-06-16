@@ -38,16 +38,12 @@ class FloatingActionButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(32),
           ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             child: Row(
               children: [
-                Icon(
-                  Icons.add,
-                  size: 32,
-                  color: Colors.white,
-                ),
+                Icon(Icons.add, size: 32, color: Colors.white),
                 Text(
-                  'Add New Dose',
+                  'Add New Dose ',
                   style: kSubTitleStyle.copyWith(color: Colors.white),
                 ),
               ],

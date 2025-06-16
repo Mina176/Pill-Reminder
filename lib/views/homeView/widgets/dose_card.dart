@@ -47,13 +47,11 @@ class DoseCard extends StatelessWidget {
                         size: 26,
                       ),
                       SizedBox(width: 18),
-                      FittedBox(
-                        child: Text(
-                          overflow: TextOverflow.ellipsis,
-                          dose.medName,
-                          style: TextStyle(
-                              fontSize: 22, fontWeight: FontWeight.w800),
-                        ),
+                      Text(
+                        overflow: TextOverflow.ellipsis,
+                        dose.medName,
+                        style: TextStyle(
+                            fontSize: 22, fontWeight: FontWeight.w800),
                       )
                     ],
                   ),
