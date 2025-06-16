@@ -59,7 +59,9 @@ class _AddDoseBodyState extends State<AddDoseBody> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text('Add Medication', style: kTitleStyle),
+        SizedBox(
+          height: 10,
+        ),
         AddMedNameSection(
           controller: controller,
           validator: (value) {

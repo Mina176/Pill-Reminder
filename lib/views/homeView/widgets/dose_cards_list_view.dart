@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:pill_reminder/models/dose_model.dart';
+import 'package:pill_reminder/views/detailsView/detalis_view.dart';
 
 import '../../../constants.dart';
 import 'dose_card.dart';
@@ -39,6 +40,7 @@ class _DoseCardsListViewState extends State<DoseCardsListView> {
                     return Slidable(
                         closeOnScroll: true,
                         endActionPane: ActionPane(
+                          extentRatio: 0.3,
                           motion: DrawerMotion(),
                           children: [
                             SlidableAction(
@@ -54,6 +56,13 @@ class _DoseCardsListViewState extends State<DoseCardsListView> {
                         ),
                         child: DoseCard(
                           doseModel: widget.alldoses![index],
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => DetalisView(dose: widget.alldoses![index],)
+                                ));
+                          },
                         ));
                   }),
             ),

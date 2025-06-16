@@ -23,26 +23,36 @@ class FloatingActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 60,
-      width: 60,
-      decoration: BoxDecoration(
-        color: kPrimaryColor,
-        borderRadius: BorderRadius.circular(32),
-      ),
-      child: IconButton(
-        onPressed: () {
-          Navigator.push(
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => AddDoseView(),
+            ));
+      },
+      child: FittedBox(
+        child: Container(
+          decoration: BoxDecoration(
+            color: kPrimaryColor,
+            borderRadius: BorderRadius.circular(32),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.add,
+                  size: 32,
+                  color: Colors.white,
+                ),
+                Text(
+                  'Add New Dose',
+                  style: kSubTitleStyle.copyWith(color: Colors.white),
+                ),
+              ],
             ),
-          );
-        },
-        icon: Icon(
-          Icons.add,
-          size: 32,
-          color: Colors.white,
+          ),
         ),
       ),
     );
