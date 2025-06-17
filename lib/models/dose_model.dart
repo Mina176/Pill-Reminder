@@ -13,9 +13,9 @@ class DoseModel extends HiveObject {
   @HiveField(3)
   final int food;
   @HiveField(4)
-  final int duration;
+  int duration;
   @HiveField(5)
-  final String time;
+  String time;
   @HiveField(6)
   bool remind;
   @HiveField(7)

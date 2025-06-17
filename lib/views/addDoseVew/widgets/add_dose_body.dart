@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pill_reminder/models/dose_model.dart';
 import 'package:pill_reminder/views/addDoseTimeView/add_dose_time_view.dart';
 import 'package:pill_reminder/views/addDoseVew/widgets/med_dose_select_section.dart';
+import 'package:pill_reminder/views/widgets/custom_app_bar.dart';
 import 'add_med_name_section.dart';
 import 'custom_next_btn.dart';
 import 'food_and_med_section.dart';
@@ -48,7 +49,6 @@ class _AddDoseBodyState extends State<AddDoseBody> {
           ),
         ),
       );
-
     } else {
       autovalidateMode = AutovalidateMode.always;
       setState(() {});
@@ -71,6 +71,7 @@ class _AddDoseBodyState extends State<AddDoseBody> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        CustomAppBar(text: 'Add Medicine'),
         SizedBox(
           height: 10,
         ),

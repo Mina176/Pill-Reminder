@@ -23,14 +23,14 @@ class _AddDoseTimeViewBodyState extends State<AddDoseTimeViewBody> {
   bool remind = true;
 
   addMed() {
-    DoseModel dose = DoseModel(
+    widget.dose.dateTime = selectedDate;
+    widget.dose.duration = selectedDuration;
+    widget.dose.remind = remind;
+    widget.dose.time = formatTime(selectedTime);
 
-      
-      duration: selectedDuration,
-      remind: remind,
-
-    );
-    addDose(dose);
+    addDose(widget.dose);
+    Navigator.pop(context);
+    Navigator.pop(context);
   }
 
   void showDatePicker() {
@@ -49,9 +49,8 @@ class _AddDoseTimeViewBodyState extends State<AddDoseTimeViewBody> {
               child: CupertinoDatePicker(
                 mode: CupertinoDatePickerMode.date,
                 itemExtent: 35,
+                minimumDate: DateTime.now(),
                 initialDateTime: DateTime.now(),
-                minimumYear: 2020,
-                maximumYear: 2100,
                 onDateTimeChanged: (DateTime newDate) {
                   setState(() {
                     selectedDate = newDate;
@@ -176,25 +175,29 @@ class _AddDoseTimeViewBodyState extends State<AddDoseTimeViewBody> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        CustomAppBar(
-          text: 'Medicine Duration and time',
-        ),
         MedDurationSec(
             title: 'Starting from:',
             onTap: showDatePicker,
             displayedDuration: formatSelectedDate(selectedDate)),
+        SizedBox(
+          height: 20,
+        ),
         MedDurationSec(
           title: 'Duration:',
           onTap: showDurationPicker,
           displayedDuration: durations[selectedDuration],
+        ),
+        SizedBox(
+          height: 20,
         ),
         MedTime(
           onTap: showTimePicker,
           displayedTime: formatTime(selectedTime),
         ),
         SizedBox(
-          height: 10,
+          height: 20,
         ),
         RemindMeSection(
           value: remind,
@@ -205,7 +208,7 @@ class _AddDoseTimeViewBodyState extends State<AddDoseTimeViewBody> {
           },
         ),
         Spacer(),
-        CustomBtn(onTap: () => addMed()),
+        CustomBtn(label: 'Add Medicine', onTap: () => addMed()),
         SizedBox(
           height: 10,
         )

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pill_reminder/models/dose_model.dart';
 
+import '../widgets/custom_app_bar.dart';
 import 'widgets/add_dose_time_view_body.dart';
 
 class AddDoseTimeView extends StatelessWidget {
@@ -11,8 +12,17 @@ class AddDoseTimeView extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-          child: AddDoseTimeViewBody(
-        dose: dose,
+          child: Column(
+        children: [
+          CustomAppBar(
+            text: 'Medicine Duration and time',
+          ),
+          Expanded(
+            child: AddDoseTimeViewBody(
+              dose: dose,
+            ),
+          ),
+        ],
       )),
     );
   }
