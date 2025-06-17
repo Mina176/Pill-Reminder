@@ -8,9 +8,11 @@ class DoseCard extends StatelessWidget {
     super.key,
     required this.dose,
     required this.onTap,
+    required this.alertOnPressed,
   });
   final DoseModel dose;
   final VoidCallback onTap;
+  final VoidCallback alertOnPressed;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -78,9 +80,22 @@ class DoseCard extends StatelessWidget {
                   SizedBox(
                     height: 15,
                   ),
-                  Text(
-                    dose.time,
-                    style: TextStyle(fontWeight: FontWeight.w800, fontSize: 16),
+                  Row(
+                    children: [
+                      IconButton(
+                          onPressed: alertOnPressed,
+                          icon: Icon(
+                            dose.remind
+                                ? FontAwesomeIcons.solidBell
+                                : FontAwesomeIcons.solidBellSlash,
+                            color: kDisabledColor,
+                          )),
+                      Text(
+                        dose.time,
+                        style: TextStyle(
+                            fontWeight: FontWeight.w800, fontSize: 16),
+                      ),
+                    ],
                   ),
                 ],
               ),

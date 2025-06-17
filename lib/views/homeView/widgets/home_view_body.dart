@@ -33,10 +33,11 @@ class _HomeViewBodyState extends State<HomeViewBody> {
           builder: (context, Box<DoseModel> box, _) {
             final alldoses = box.values.toList();
             WidgetsBinding.instance.addPostFrameCallback((_) {
-              controller.jumpTo(
-                controller.position.maxScrollExtent,
-              );
+              if (controller.hasClients) {
+                controller.jumpTo(controller.position.maxScrollExtent);
+              }
             });
+            if (box.values.isEmpty) return NoDoses();
             return DoseCardsListView(
               alldoses: alldoses,
               controller: controller,
@@ -66,7 +67,7 @@ class NoDoses extends StatelessWidget {
           ),
           Text(
             'Click on \'Add New Dose\'',
-            style: kTitleStyle.copyWith(fontSize: 18),
+            style: kTitleStyle.copyWith(fontSize: 16),
           ),
         ],
       ),

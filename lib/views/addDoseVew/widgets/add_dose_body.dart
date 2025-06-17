@@ -114,40 +114,8 @@ class _AddDoseBodyState extends State<AddDoseBody> {
         ),
         Spacer(),
         CustomBtn(
-          widget: Text(
-            'Add Medicine',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 18,
-              fontWeight: FontWeight.w700,
-              letterSpacing: 0.2,
-            ),
-          ),
-          onTap: () {
-            if (controller.text.isNotEmpty) {
-              setState(() {
-                medName = controller.text;
-              });
-              addDose(
-                DoseModel(
-                  remind: remind,
-                  medName: medName!,
-                  form: selectedForm,
-                  dose: selectedDose,
-                  food: selectedFood,
-                  duration: selectedDuration,
-                  time: formatTime(selectedTime),
-                  isTaken: false,
-                ),
-              );
-              fetchAllDoses();
-              Navigator.of(context).pop();
-              controller.clear();
-            } else {
-              autovalidateMode = AutovalidateMode.always;
-              setState(() {});
-            }
-          },
+          label: 'Add Medicine',
+          onTap: addMedOnTap,
         ),
       ],
     );
@@ -246,5 +214,31 @@ class _AddDoseBodyState extends State<AddDoseBody> {
         ),
       ),
     );
+  }
+
+  addMedOnTap() {
+    if (controller.text.isNotEmpty) {
+      setState(() {
+        medName = controller.text;
+      });
+      addDose(
+        DoseModel(
+          remind: remind,
+          medName: medName!,
+          form: selectedForm,
+          dose: selectedDose,
+          food: selectedFood,
+          duration: selectedDuration,
+          time: formatTime(selectedTime),
+          isTaken: false,
+        ),
+      );
+      fetchAllDoses();
+      Navigator.of(context).pop();
+      controller.clear();
+    } else {
+      autovalidateMode = AutovalidateMode.always;
+      setState(() {});
+    }
   }
 }

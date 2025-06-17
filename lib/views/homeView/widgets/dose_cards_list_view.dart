@@ -26,65 +26,47 @@ class _DoseCardsListViewState extends State<DoseCardsListView> {
   bool isTaken = false;
   @override
   Widget build(BuildContext context) {
-    if (widget.alldoses?.isEmpty ?? true) {
-      return Center(
-        child: Text('No Doses yet!'),
-      );
-    } else {
-      return Expanded(
-          child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SlidableAutoCloseBehavior(
-          closeWhenOpened: true,
-          child: ListView.separated(
-              separatorBuilder: (context, index) => SizedBox(height: 15),
-              controller: widget.controller,
-              itemCount: widget.alldoses!.length,
-              itemBuilder: (context, index) {
-                return Slidable(
-                    closeOnScroll: true,
-                    endActionPane: ActionPane(
-                      extentRatio: 0.31,
-                      motion: DrawerMotion(),
-                      children: [
-                        widget.alldoses![index].isTaken!
-                            ? SlidableAction(
-                                onPressed: (context) => toggleTakeMed(index),
-                                backgroundColor: kDisabledColor,
-                                icon: FontAwesomeIcons.rotateLeft,
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(16),
-                                    bottomRight: Radius.circular(16)),
-                                label: 'Untake Med',
-                              )
-                            : SlidableAction(
-                                onPressed: (context) => toggleTakeMed(index),
-                                backgroundColor: Colors.green,
-                                icon: FontAwesomeIcons.check,
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(16),
-                                    bottomRight: Radius.circular(16)),
-                                label: 'Take Med',
-                              ),
-                      ],
-                    ),
-                    child: DoseCard(
-                      dose: widget.alldoses![index],
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => DetalisView(
-                              dose: widget.alldoses![index],
+    return Expanded(
+        child: Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: SlidableAutoCloseBehavior(
+        closeWhenOpened: true,
+        child: ListView.separated(
+            separatorBuilder: (context, index) => SizedBox(height: 15),
+            controller: widget.controller,
+            itemCount: widget.alldoses!.length,
+            itemBuilder: (context, index) {
+              return Slidable(
+                  closeOnScroll: true,
+                  endActionPane: ActionPane(
+                    extentRatio: 0.31,
+                    motion: DrawerMotion(),
+                    children: [
+                      widget.alldoses![index].isTaken!
+                          ? SlidableAction(
+                              onPressed: (context) => toggleTakeMed(index),
+                              backgroundColor: kDisabledColor,
+                              icon: FontAwesomeIcons.rotateLeft,
+                              borderRadius: buildBorder(),
+                              label: 'Untake Med',
+                            )
+                          : SlidableAction(
+                              onPressed: (context) => toggleTakeMed(index),
+                              backgroundColor: Colors.green,
+                              icon: FontAwesomeIcons.check,
+                              borderRadius: buildBorder(),
+                              label: 'Take Med',
                             ),
-                          ),
-                        );
-                      },
-                    ));
-              }),
-        ),
-      ));
-    }
+                    ],
+                  ),
+                  child: DoseCard(
+                    dose: widget.alldoses![index],
+                    onTap: () => doseCardOnTap(index),
+                    alertOnPressed: () => alertOnPressed(index),
+                  ));
+            }),
+      ),
+    ));
   }
 
   void toggleTakeMed(int index) {
@@ -97,5 +79,27 @@ class _DoseCardsListViewState extends State<DoseCardsListView> {
       dose.isTaken = false;
       dose.save();
     }
+  }
+
+  doseCardOnTap(int index) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => DetalisView(
+          dose: widget.alldoses![index],
+        ),
+      ),
+    );
+  }
+
+  alertOnPressed(int index) {
+    setState(() {
+      widget.alldoses![index].remind = !(widget.alldoses![index].remind);
+    });
+  }
+
+  buildBorder() {
+    return BorderRadius.only(
+        topRight: Radius.circular(16), bottomRight: Radius.circular(16));
   }
 }

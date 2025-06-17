@@ -22,7 +22,6 @@ class MedTime extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
               color: Colors.white,
-              border: Border.all(color: kDisabledColor, width: 0.2),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black

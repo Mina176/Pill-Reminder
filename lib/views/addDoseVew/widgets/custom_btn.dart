@@ -5,11 +5,13 @@ class CustomBtn extends StatelessWidget {
   const CustomBtn({
     super.key,
     required this.onTap,
-    required this.widget,
     this.color = kBtnColor,
+    this.widget,
+    this.label,
   });
   final Color color;
-  final Widget widget;
+  final Widget? widget;
+  final String? label;
   final VoidCallback? onTap;
 
   @override
@@ -21,7 +23,18 @@ class CustomBtn extends StatelessWidget {
             color: color, borderRadius: BorderRadius.circular(16)),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 12),
-          child: Center(child: widget),
+          child: Center(
+            child: widget ??
+                Text(
+                  'Add Medicine',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: 0.2,
+                  ),
+                ),
+          ),
         ),
       ),
     );
