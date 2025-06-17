@@ -78,42 +78,8 @@ class DetailsViewBody extends StatelessWidget {
                 child: CustomBtn(
                     color: Colors.red,
                     onTap: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          return CupertinoAlertDialog(
-                            content: Text(
-                                'Are You Sure you want to delete Medication?'),
-                            actions: [
-                              GestureDetector(
-                                onTap: () => Navigator.pop(context),
-                                child: Center(
-                                  child: Text(
-                                    'No',
-                                    style: TextStyle(color: Colors.black),
-                                  ),
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  deleteMed();
-                                  Navigator.pop(context);
-                                  Navigator.pop(context);
-                                },
-                                child: Center(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      'Yes',
-                                      style: TextStyle(color: Colors.black),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          );
-                        },
-                      );
+                      deleteMed();
+                      Navigator.of(context).pop();
                     },
                     widget: Row(
                       mainAxisAlignment: MainAxisAlignment.center,

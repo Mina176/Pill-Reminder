@@ -47,3 +47,29 @@ class _HomeViewBodyState extends State<HomeViewBody> {
     );
   }
 }
+
+class NoDoses extends StatelessWidget {
+  const NoDoses({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            "No Doses yet !",
+            style: kTitleStyle,
+          ),
+          Text(
+            'Click on \'Add New Dose\'',
+            style: kTitleStyle.copyWith(fontSize: 18),
+          ),
+        ],
+      ),
+    );
+  }
+}

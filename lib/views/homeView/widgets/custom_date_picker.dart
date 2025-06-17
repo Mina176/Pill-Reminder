@@ -33,7 +33,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 24, right: 24, top: 16),
+      padding: const EdgeInsets.only(left: 24, right: 24, top: 8),
       child: Row(
         children: [
           Text(
