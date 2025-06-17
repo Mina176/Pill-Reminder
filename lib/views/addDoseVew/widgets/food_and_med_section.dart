@@ -44,11 +44,11 @@ class FoodCard extends StatelessWidget {
   const FoodCard({
     super.key,
     required this.text,
-    required this.onPressed,
+    this.onPressed,
     required this.isSelected,
   });
   final String text;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final bool isSelected;
   @override
   Widget build(BuildContext context) {

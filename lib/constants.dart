@@ -38,8 +38,10 @@ IconData formToIcon(int val) {
     return FontAwesomeIcons.tablets;
   } else if (val == 1) {
     return FontAwesomeIcons.pills;
-  } else {
+  } else if (val == 2) {
     return FontAwesomeIcons.syringe;
+  } else {
+    return FontAwesomeIcons.flask;
   }
 }
 
@@ -48,8 +50,10 @@ String intFormToString(int val) {
     return 'tablets';
   } else if (val == 1) {
     return 'pills';
-  } else {
+  } else if (val == 2) {
     return 'syringe';
+  } else {
+    return 'solution';
   }
 }
 

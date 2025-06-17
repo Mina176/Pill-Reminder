@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -35,7 +34,6 @@ class DetailsViewBody extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
           ),
           Text('Med Form', style: kSubTitleStyle),
-          SizedBox(height: 5),
           MedTypeCard(
             icon: formToIcon(
               dose.form,
@@ -45,7 +43,6 @@ class DetailsViewBody extends StatelessWidget {
             isSelected: true,
           ),
           Text('Dose', style: kSubTitleStyle),
-          SizedBox(height: 5),
           SizedBox(
             width: MediaQuery.of(context).size.width / 3.5,
             child: DoseCountItem(
@@ -54,12 +51,10 @@ class DetailsViewBody extends StatelessWidget {
             ),
           ),
           Text('Food and Medicine', style: kSubTitleStyle),
-          SizedBox(height: 5),
           SizedBox(
             width: MediaQuery.of(context).size.width / 3.5,
             child: FoodCard(
               text: intFoodToString(dose.food),
-              onPressed: () {},
               isSelected: true,
             ),
           ),
@@ -71,58 +66,63 @@ class DetailsViewBody extends StatelessWidget {
           SizedBox(height: 5),
           SelectedTime(dose: dose),
           SizedBox(height: 10),
-          Row(
-            children: [
-              Text('Alert is ', style: kSubTitleStyle),
-              Icon(
-                dose.remind
-                    ? FontAwesomeIcons.solidBell
-                    : FontAwesomeIcons.solidBellSlash,
-                color: kDisabledColor,
-              ),
-            ],
-          ),
+          Text('Remind me is ${dose.remind ? 'on' : 'off'}',
+              style: kSubTitleStyle),
           Spacer(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                child: CustomBtn(
-                  color: Colors.red,
-                  onTap: () {
-                    deleteMed();
-                    Navigator.of(context).pop();
-                  },
-                  widget: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Delete',
-                        style: kBtnTextStyle,
-                      ),
-                      Icon(
-                        FontAwesomeIcons.xmark,
-                        color: Colors.white,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              Expanded(
-                child: CustomAnimatedBtn(
-                  dose: dose,
-                ),
-              ),
-            ],
-          ),
+          Buttons(dose: dose),
           SizedBox(
             height: 12,
           ),
         ],
       ),
+    );
+  }
+}
+
+class Buttons extends StatelessWidget {
+  const Buttons({
+    super.key,
+    required this.dose,
+  });
+
+  final DoseModel dose;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Expanded(
+          child: CustomBtn(
+            color: Colors.red,
+            onTap: () {
+              deleteMed();
+              Navigator.of(context).pop();
+            },
+            widget: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Delete',
+                  style: kBtnTextStyle,
+                ),
+                Icon(
+                  FontAwesomeIcons.xmark,
+                  color: Colors.white,
+                ),
+              ],
+            ),
+          ),
+        ),
+        SizedBox(
+          width: 10,
+        ),
+        Expanded(
+          child: CustomAnimatedBtn(
+            dose: dose,
+          ),
+        ),
+      ],
     );
   }
 

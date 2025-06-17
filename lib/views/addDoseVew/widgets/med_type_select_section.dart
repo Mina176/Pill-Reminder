@@ -16,6 +16,7 @@ class MedFormSection extends StatelessWidget {
       FontAwesomeIcons.tablets,
       FontAwesomeIcons.capsules,
       FontAwesomeIcons.syringe,
+      FontAwesomeIcons.flask,
     ];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
