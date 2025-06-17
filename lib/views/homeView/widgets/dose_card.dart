@@ -35,40 +35,45 @@ class DoseCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Icon(
-                        isTakenToIcon(dose.isTaken ?? false),
-                        color: (dose.isTaken ?? false)
-                            ? Colors.green
-                            : kPrimaryColor,
-                        size: 26,
-                      ),
-                      SizedBox(width: 18),
-                      Text(
-                        overflow: TextOverflow.ellipsis,
-                        dose.medName,
-                        style: TextStyle(
-                            fontSize: 22, fontWeight: FontWeight.w800),
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: 7,
-                  ),
-                  Text(
-                    'dose: ${dose.dose + 1} ${intFormToString(dose.form)}',
-                    style: kFeaturesStyle,
-                  ),
-                  Text(
-                    'features: ${intFoodToString(dose.food)}',
-                    style: kFeaturesStyle,
-                  ),
-                ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Icon(
+                          isTakenToIcon(dose.isTaken ?? false),
+                          color: (dose.isTaken ?? false)
+                              ? Colors.green
+                              : kPrimaryColor,
+                          size: 26,
+                        ),
+                        SizedBox(width: 18),
+                        Flexible(
+                          child: Text(
+                            dose.medName,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                            style: TextStyle(
+                                fontSize: 22, fontWeight: FontWeight.w800),
+                          ),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 7,
+                    ),
+                    Text(
+                      'dose: ${dose.dose + 1} ${intFormToString(dose.form)}',
+                      style: kFeaturesStyle,
+                    ),
+                    Text(
+                      'features: ${intFoodToString(dose.food)}',
+                      style: kFeaturesStyle,
+                    ),
+                  ],
+                ),
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -81,15 +86,21 @@ class DoseCard extends StatelessWidget {
                     height: 15,
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      IconButton(
-                          onPressed: alertOnPressed,
-                          icon: Icon(
-                            dose.remind
-                                ? FontAwesomeIcons.solidBell
-                                : FontAwesomeIcons.solidBellSlash,
-                            color: kDisabledColor,
-                          )),
+                      GestureDetector(
+                        onTap: alertOnPressed,
+                        child: Icon(
+                          dose.remind
+                              ? FontAwesomeIcons.solidBell
+                              : FontAwesomeIcons.solidBellSlash,
+                          color: kDisabledColor,
+                          size: 24,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 8,
+                      ),
                       Text(
                         dose.time,
                         style: TextStyle(
