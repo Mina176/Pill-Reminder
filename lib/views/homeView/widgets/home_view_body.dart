@@ -15,12 +15,6 @@ class HomeViewBody extends StatefulWidget {
 }
 
 class _HomeViewBodyState extends State<HomeViewBody> {
-  @override
-  void initState() {
-    fetchAllDoses();
-    super.initState();
-  }
-
   final ScrollController controller = ScrollController();
 
   @override
@@ -62,7 +56,7 @@ class NoDoses extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            "No Doses yet !",
+            "No Doses here",
             style: kTitleStyle,
           ),
           Text(

@@ -8,17 +8,20 @@ class CustomBtn extends StatelessWidget {
     this.color = kBtnColor,
     this.widget,
     this.label,
+    this.width,
   });
   final Color color;
   final Widget? widget;
   final String? label;
   final VoidCallback? onTap;
+  final double? width;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        width: width ?? MediaQuery.of(context).size.width / 2,
         decoration: BoxDecoration(
             color: color, borderRadius: BorderRadius.circular(16)),
         child: Padding(
@@ -26,7 +29,7 @@ class CustomBtn extends StatelessWidget {
           child: Center(
             child: widget ??
                 Text(
-                  'Add Medicine',
+                  label ?? '',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18,

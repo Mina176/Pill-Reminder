@@ -72,12 +72,7 @@ addDose(DoseModel dose) async {
   await doseBox.add(dose);
 }
 
-List<DoseModel> fetchAllDoses() {
-  List<DoseModel>? alldoses;
-  var dosesBox = Hive.box<DoseModel>(kDoseBox);
-  alldoses = dosesBox.values.toList();
-  return alldoses;
-}
+
 
 String formatTime(TimeOfDay? selectedTime) {
   if (selectedTime == null) return "9:00 AM";
