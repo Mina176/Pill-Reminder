@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-
 import '../../../constants.dart';
-import '../../addDoseTimeView/add_dose_time_view.dart';
 import 'custom_btn.dart';
 
 class NextCustomBtn extends StatelessWidget {
   const NextCustomBtn({
     super.key,
-    required this.context,
+    required this.onTap,
   });
-  final BuildContext context;
+  final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -31,14 +29,9 @@ class NextCustomBtn extends StatelessWidget {
               )
             ],
           ),
-          onTap: () => nextView(context),
-        ),
+          onTap: onTap,
+        )
       ],
     );
-  }
-
-  void nextView(BuildContext context) {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => AddDoseTimeView()));
   }
 }

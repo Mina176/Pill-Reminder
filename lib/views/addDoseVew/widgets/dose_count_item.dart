@@ -21,15 +21,11 @@ class DoseCountItem extends StatelessWidget {
           width: MediaQuery.of(context).size.width / 3,
           decoration: BoxDecoration(
               color: isSelected ?? false ? kPrimaryColor : Colors.white,
-              border: Border.all(
-                color: isSelected ?? false ? kPrimaryColor : kDisabledColor,
-                width: 1.25,
-              ),
               borderRadius: BorderRadius.circular(24),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black
-                      .withValues(alpha: 0.06), // very subtle shadow
+                  color:
+                      Colors.black.withValues(alpha: 0.1), // very subtle shadow
                   blurRadius: 8,
                 ),
               ]),

@@ -57,13 +57,13 @@ class FoodCard extends StatelessWidget {
       child: GestureDetector(
         onTap: onPressed,
         child: Container(
-          height: 50,
+          height: 70,
           decoration: BoxDecoration(
               color: isSelected ? kPrimaryColor : Colors.white,
               borderRadius: BorderRadius.circular(8),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.2),
+                  color: Colors.black.withValues(alpha: 0.1),
                   blurRadius: 4,
                   spreadRadius: 1,
                 )

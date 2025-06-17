@@ -19,16 +19,18 @@ class DoseModel extends HiveObject {
   @HiveField(6)
   bool remind;
   @HiveField(7)
-  bool? isTaken;
+  bool isTaken;
+  @HiveField(8)
+  DateTime? dateTime;
 
-  DoseModel({
-    this.isTaken = false,
-    this.remind = true,
-    required this.medName,
-    required this.form,
-    required this.dose,
-    required this.food,
-    required this.duration,
-    required this.time,
-  });
+  DoseModel(
+      {this.isTaken = false,
+      this.remind = true,
+      this.medName = '',
+      this.form = 0,
+      this.dose = 0,
+      this.food = 0,
+      this.duration = 2,
+      this.time = '9:00',
+      this.dateTime});
 }

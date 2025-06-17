@@ -1,14 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pill_reminder/models/dose_model.dart';
+import 'package:pill_reminder/views/addDoseTimeView/add_dose_time_view.dart';
 import 'package:pill_reminder/views/addDoseVew/widgets/med_dose_select_section.dart';
-import '../../../constants.dart';
 import 'add_med_name_section.dart';
-import 'add_pill_time.dart';
 import 'custom_next_btn.dart';
 import 'food_and_med_section.dart';
-import 'med_duration_sec.dart';
 import 'med_type_select_section.dart';
-import 'remind_me_section.dart';
 
 class AddDoseBody extends StatefulWidget {
   const AddDoseBody({super.key});
@@ -31,6 +28,32 @@ class _AddDoseBodyState extends State<AddDoseBody> {
 
   late TextEditingController controller;
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
+
+  nextOnTap() {
+    if (controller.text.isNotEmpty) {
+      setState(() {
+        medName = controller.text;
+      });
+      DoseModel dose = DoseModel(
+        medName: medName!,
+        form: selectedForm,
+        dose: selectedDose,
+        food: selectedFood,
+      );
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => AddDoseTimeView(
+            dose: dose,
+          ),
+        ),
+      );
+
+    } else {
+      autovalidateMode = AutovalidateMode.always;
+      setState(() {});
+    }
+  }
 
   @override
   void initState() {
@@ -92,123 +115,11 @@ class _AddDoseBodyState extends State<AddDoseBody> {
             });
           },
         ),
-        MedDurationSec(
-          onTap: showDurationPicker,
-          displayedDuration: durations[selectedDuration],
-        ),
-        MedTime(
-          onTap: showTimePicker,
-          displayedTime: formatTime(selectedTime),
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        RemindMeSection(
-          value: remind,
-          onChanged: (value) {
-            setState(() {
-              remind = value;
-            });
-          },
-        ),
         Spacer(),
-        NextCustomBtn(context: context),
+        NextCustomBtn(
+          onTap: () => nextOnTap(),
+        )
       ],
-    );
-  }
-
-  void showDurationPicker() {
-    showCupertinoModalPopup(
-      context: context,
-      builder: (context) => Padding(
-        padding: const EdgeInsets.all(12),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(16)),
-              height: 200,
-              child: CupertinoPicker(
-                scrollController: FixedExtentScrollController(
-                  initialItem: selectedDuration,
-                ),
-                itemExtent: 35,
-                onSelectedItemChanged: (int value) {
-                  setState(() {
-                    selectedDuration = value;
-                  });
-                },
-                children: durations.map((d) => Text(d)).toList(),
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-              child: CupertinoButton(
-                color: Colors.white,
-                child: Text(
-                  'Done',
-                  style: TextStyle(color: Colors.red),
-                ),
-                onPressed: () => Navigator.of(context).pop(),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
-  void showTimePicker() {
-    showCupertinoModalPopup(
-      context: context,
-      builder: (context) => Padding(
-        padding: const EdgeInsets.all(12),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(16)),
-              height: 200,
-              child: CupertinoDatePicker(
-                use24hFormat: false,
-                initialDateTime: DateTime(
-                  0,
-                  0,
-                  0,
-                  selectedTime?.hour ?? DateTime.now().hour,
-                  selectedTime?.minute ?? DateTime.now().minute,
-                ),
-                mode: CupertinoDatePickerMode.time,
-                onDateTimeChanged: (newTime) {
-                  setState(() {
-                    selectedTime =
-                        TimeOfDay(hour: newTime.hour, minute: newTime.minute);
-                  });
-                },
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-              child: CupertinoButton(
-                color: Colors.white,
-                child: Text(
-                  'Done',
-                  style: TextStyle(color: Colors.red),
-                ),
-                onPressed: () => Navigator.of(context).pop(),
-              ),
-            )
-          ],
-        ),
-      ),
     );
   }
 }

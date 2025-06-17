@@ -7,7 +7,9 @@ class MedDurationSec extends StatelessWidget {
     super.key,
     required this.onTap,
     required this.displayedDuration,
+    required this.title,
   });
+  final String title;
   final VoidCallback onTap;
   final String displayedDuration;
   @override
@@ -17,7 +19,7 @@ class MedDurationSec extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.only(left: 8),
-          child: Text('Duration:', style: kSubTitleStyle),
+          child: Text(title, style: kSubTitleStyle),
         ),
         GestureDetector(
           onTap: onTap,

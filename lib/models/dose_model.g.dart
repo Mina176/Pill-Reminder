@@ -17,7 +17,7 @@ class DoseModelAdapter extends TypeAdapter<DoseModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return DoseModel(
-      isTaken: fields[7] as bool?,
+      isTaken: fields[7] as bool,
       remind: fields[6] as bool,
       medName: fields[0] as String,
       form: fields[1] as int,
@@ -25,13 +25,14 @@ class DoseModelAdapter extends TypeAdapter<DoseModel> {
       food: fields[3] as int,
       duration: fields[4] as int,
       time: fields[5] as String,
+      dateTime: fields[8] as DateTime?,
     );
   }
 
   @override
   void write(BinaryWriter writer, DoseModel obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(9)
       ..writeByte(0)
       ..write(obj.medName)
       ..writeByte(1)
@@ -47,7 +48,9 @@ class DoseModelAdapter extends TypeAdapter<DoseModel> {
       ..writeByte(6)
       ..write(obj.remind)
       ..writeByte(7)
-      ..write(obj.isTaken);
+      ..write(obj.isTaken)
+      ..writeByte(8)
+      ..write(obj.dateTime);
   }
 
   @override
