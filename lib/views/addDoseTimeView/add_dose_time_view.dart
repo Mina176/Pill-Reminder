@@ -17,6 +17,7 @@ class AddDoseTimeView extends StatelessWidget {
           CustomAppBar(
             text: 'Medicine Duration and time',
           ),
+          SizedBox(height: 10),
           Expanded(
             child: AddDoseTimeViewBody(
               dose: dose,

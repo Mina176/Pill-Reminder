@@ -42,7 +42,7 @@ class _DoseCardsListViewState extends State<DoseCardsListView> {
                     extentRatio: 0.31,
                     motion: DrawerMotion(),
                     children: [
-                      widget.alldoses![index].isTaken!
+                      widget.alldoses![index].isTaken
                           ? SlidableAction(
                               onPressed: (context) => toggleTakeMed(index),
                               backgroundColor: kDisabledColor,

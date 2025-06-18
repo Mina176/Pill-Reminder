@@ -29,7 +29,7 @@ class MedFormSection extends StatelessWidget {
           ),
         ),
         SizedBox(
-            height: 100,
+            height: 150,
             child: Row(
               children: List.generate(typeIcons.length, (index) {
                 return Expanded(

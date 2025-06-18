@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pill_reminder/constants.dart';
 import 'package:pill_reminder/models/dose_model.dart';
 
 import 'widgets/details_view_body.dart';
@@ -12,13 +11,6 @@ class DetalisView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: Text(
-          'Medicine',
-          style: kTitleStyle,
-        ),
-      ),
       body: SafeArea(
         child: DetailsViewBody(
           dose: dose,

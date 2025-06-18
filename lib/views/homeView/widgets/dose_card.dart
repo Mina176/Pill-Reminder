@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pill_reminder/constants.dart';
 import 'package:pill_reminder/models/dose_model.dart';
+import '../../../utils.dart';
 
 class DoseCard extends StatelessWidget {
   const DoseCard({
@@ -43,10 +44,8 @@ class DoseCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Icon(
-                          isTakenToIcon(dose.isTaken ?? false),
-                          color: (dose.isTaken ?? false)
-                              ? Colors.green
-                              : kPrimaryColor,
+                          isTakenToIcon(dose.isTaken),
+                          color: (dose.isTaken) ? Colors.green : kPrimaryColor,
                           size: 26,
                         ),
                         SizedBox(width: 18),

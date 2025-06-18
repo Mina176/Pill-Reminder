@@ -20,18 +20,18 @@ class _CustomAnimatedBtnState extends State<CustomAnimatedBtn> {
     return GestureDetector(
       onTap: () {
         setState(() {
-          widget.dose.isTaken = !(widget.dose.isTaken ?? false);
+          widget.dose.isTaken = !(widget.dose.isTaken);
           widget.dose.save();
         });
       },
       child: AnimatedContainer(
         curve: Curves.easeIn,
-        duration: Duration(milliseconds: 250),
+        duration: Duration(milliseconds: 300),
         decoration: BoxDecoration(
-            color: widget.dose.isTaken ?? false ? Colors.green : kBtnColor,
+            color: widget.dose.isTaken ? Colors.green : kBtnColor,
             borderRadius: BorderRadius.circular(18)),
         child: Center(
-          child: widget.dose.isTaken ?? false
+          child: widget.dose.isTaken
               ? FittedBox(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 12),

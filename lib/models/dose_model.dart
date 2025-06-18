@@ -21,7 +21,7 @@ class DoseModel extends HiveObject {
   @HiveField(7)
   bool isTaken;
   @HiveField(8)
-  DateTime? dateTime;
+  DateTime? date;
 
   DoseModel(
       {this.isTaken = false,
@@ -32,5 +32,5 @@ class DoseModel extends HiveObject {
       this.food = 0,
       this.duration = 2,
       this.time = '9:00',
-      this.dateTime});
+      this.date});
 }

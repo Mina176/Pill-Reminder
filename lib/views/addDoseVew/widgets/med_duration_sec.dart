@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
 
-class MedDurationSec extends StatelessWidget {
-  const MedDurationSec({
+class MedSelectionSec extends StatelessWidget {
+  const MedSelectionSec({
     super.key,
     required this.onTap,
-    required this.displayedDuration,
+    required this.selectedText,
     required this.title,
   });
   final String title;
   final VoidCallback onTap;
-  final String displayedDuration;
+  final String selectedText;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -28,13 +28,10 @@ class MedDurationSec extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: kDisabledColor, width: 0.1),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black
-                      .withValues(alpha: 0.06), // very subtle shadow
+                  color: Colors.black.withValues(alpha: 0.06),
                   blurRadius: 8,
-                  offset: Offset(0, 8.5),
                 ),
               ],
             ),
@@ -42,7 +39,7 @@ class MedDurationSec extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  displayedDuration,
+                  selectedText,
                   style: TextStyle(fontSize: 26, fontWeight: FontWeight.w700),
                 ),
               ),

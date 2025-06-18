@@ -9,7 +9,6 @@ Future<void> main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(DoseModelAdapter());
   await Hive.openBox<DoseModel>(kDoseBox);
-
   runApp(const PillReminder());
 }
 

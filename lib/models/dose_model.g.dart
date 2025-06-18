@@ -25,7 +25,7 @@ class DoseModelAdapter extends TypeAdapter<DoseModel> {
       food: fields[3] as int,
       duration: fields[4] as int,
       time: fields[5] as String,
-      dateTime: fields[8] as DateTime?,
+      date: fields[8] as DateTime?,
     );
   }
 
@@ -50,7 +50,7 @@ class DoseModelAdapter extends TypeAdapter<DoseModel> {
       ..writeByte(7)
       ..write(obj.isTaken)
       ..writeByte(8)
-      ..write(obj.dateTime);
+      ..write(obj.date);
   }
 
   @override

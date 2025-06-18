@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pill_reminder/constants.dart';
 
+import '../../../utils.dart';
+
 class MedTypeCard extends StatelessWidget {
   const MedTypeCard(
       {super.key,
@@ -22,6 +24,7 @@ class MedTypeCard extends StatelessWidget {
       child: GestureDetector(
         onTap: onPressed,
         child: Container(
+          height: 120,
           width: 120,
           decoration: BoxDecoration(
             color: cardColor,

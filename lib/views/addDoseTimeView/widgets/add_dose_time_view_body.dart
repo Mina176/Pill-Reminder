@@ -1,12 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pill_reminder/utils.dart';
 import 'package:pill_reminder/views/addDoseVew/widgets/custom_btn.dart';
 import '../../../models/dose_model.dart';
-import '../../addDoseVew/widgets/add_pill_time.dart';
 import '../../addDoseVew/widgets/med_duration_sec.dart';
 import '../../addDoseVew/widgets/remind_me_section.dart';
 import '../../../constants.dart';
-import '../../widgets/custom_app_bar.dart';
 
 class AddDoseTimeViewBody extends StatefulWidget {
   const AddDoseTimeViewBody({super.key, required this.dose});
@@ -23,7 +21,7 @@ class _AddDoseTimeViewBodyState extends State<AddDoseTimeViewBody> {
   bool remind = true;
 
   addMed() {
-    widget.dose.dateTime = selectedDate;
+    widget.dose.date = selectedDate;
     widget.dose.duration = selectedDuration;
     widget.dose.remind = remind;
     widget.dose.time = formatTime(selectedTime);
@@ -33,172 +31,45 @@ class _AddDoseTimeViewBodyState extends State<AddDoseTimeViewBody> {
     Navigator.pop(context);
   }
 
-  void showDatePicker() {
-    showCupertinoModalPopup(
-      context: context,
-      builder: (context) => Padding(
-        padding: const EdgeInsets.all(12),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(16)),
-              height: 200,
-              child: CupertinoDatePicker(
-                mode: CupertinoDatePickerMode.date,
-                itemExtent: 35,
-                minimumDate: DateTime.now(),
-                initialDateTime: DateTime.now(),
-                onDateTimeChanged: (DateTime newDate) {
-                  setState(() {
-                    selectedDate = newDate;
-                  });
-                },
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-              child: CupertinoButton(
-                color: Colors.white,
-                child: Text(
-                  'Done',
-                  style: TextStyle(color: Colors.red),
-                ),
-                onPressed: () => Navigator.of(context).pop(),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
-  void showDurationPicker() {
-    showCupertinoModalPopup(
-      context: context,
-      builder: (context) => Padding(
-        padding: const EdgeInsets.all(12),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(16)),
-              height: 200,
-              child: CupertinoPicker(
-                scrollController: FixedExtentScrollController(
-                  initialItem: selectedDuration,
-                ),
-                itemExtent: 35,
-                onSelectedItemChanged: (int value) {
-                  setState(() {
-                    selectedDuration = value;
-                  });
-                },
-                children: durations.map((d) => Text(d)).toList(),
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-              child: CupertinoButton(
-                color: Colors.white,
-                child: Text(
-                  'Done',
-                  style: TextStyle(color: Colors.red),
-                ),
-                onPressed: () => Navigator.of(context).pop(),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
-  void showTimePicker() {
-    showCupertinoModalPopup(
-      context: context,
-      builder: (context) => Padding(
-        padding: const EdgeInsets.all(12),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(16)),
-              height: 200,
-              child: CupertinoDatePicker(
-                use24hFormat: false,
-                initialDateTime: DateTime(
-                  0,
-                  0,
-                  0,
-                  selectedTime?.hour ?? DateTime.now().hour,
-                  selectedTime?.minute ?? DateTime.now().minute,
-                ),
-                mode: CupertinoDatePickerMode.time,
-                onDateTimeChanged: (newTime) {
-                  setState(() {
-                    selectedTime =
-                        TimeOfDay(hour: newTime.hour, minute: newTime.minute);
-                  });
-                },
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-              child: CupertinoButton(
-                color: Colors.white,
-                child: Text(
-                  'Done',
-                  style: TextStyle(color: Colors.red),
-                ),
-                onPressed: () => Navigator.of(context).pop(),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        MedDurationSec(
+        SizedBox(height: 15),
+        MedSelectionSec(
             title: 'Starting from:',
-            onTap: showDatePicker,
-            displayedDuration: formatSelectedDate(selectedDate)),
-        SizedBox(
-          height: 20,
-        ),
-        MedDurationSec(
+            onTap: () => showDatePickerIos(
+                  context: context,
+                  onDateChanged: (DateTime newDate) =>
+                      setState(() => selectedDate = newDate),
+                ),
+            selectedText: formatSelectedDate(selectedDate)),
+        kSectionsSpace,
+        MedSelectionSec(
           title: 'Duration:',
-          onTap: showDurationPicker,
-          displayedDuration: durations[selectedDuration],
+          onTap: () => showItemPickerIos(
+            context: context,
+            initialItem: selectedDuration,
+            listName: durations,
+            onitemChanged: (int value) {
+              setState(() => selectedDuration = value);
+            },
+          ),
+          selectedText: durations[selectedDuration],
         ),
-        SizedBox(
-          height: 20,
+        kSectionsSpace,
+        MedSelectionSec(
+          title: 'Time:',
+          onTap: () => showTimePickerIos(
+              context: context,
+              selectedTime: selectedTime ?? TimeOfDay(hour: 9, minute: 00),
+              onTimeChanged: (newTime) {
+                setState(() => selectedTime =
+                    TimeOfDay(hour: newTime.hour, minute: newTime.minute));
+              }),
+          selectedText: formatTime(selectedTime),
         ),
-        MedTime(
-          onTap: showTimePicker,
-          displayedTime: formatTime(selectedTime),
-        ),
-        SizedBox(
-          height: 20,
-        ),
+        Spacer(),
         RemindMeSection(
           value: remind,
           onChanged: (value) {
@@ -207,11 +78,8 @@ class _AddDoseTimeViewBodyState extends State<AddDoseTimeViewBody> {
             });
           },
         ),
-        Spacer(),
         CustomBtn(label: 'Add Medicine', onTap: () => addMed()),
-        SizedBox(
-          height: 10,
-        )
+        kBottomSpace
       ],
     );
   }

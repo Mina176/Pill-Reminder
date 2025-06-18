@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../constants.dart';
 import 'widgets/add_dose_body.dart';
 
 class AddDoseView extends StatelessWidget {
