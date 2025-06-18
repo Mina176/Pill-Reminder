@@ -16,7 +16,6 @@ Future<dynamic> showDatePickerIos({
             picker: CupertinoDatePicker(
               mode: CupertinoDatePickerMode.date,
               itemExtent: 35,
-              minimumDate: DateTime.now(),
               initialDateTime: DateTime.now(),
               onDateTimeChanged: onDateChanged,
             ),

@@ -16,7 +16,7 @@ class NextCustomBtn extends StatelessWidget {
         CustomBtn(
           width: MediaQuery.of(context).size.width / 4,
           widget: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 'Next',
