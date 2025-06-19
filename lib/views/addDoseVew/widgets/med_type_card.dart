@@ -3,8 +3,8 @@ import 'package:pill_reminder/constants.dart';
 
 import '../../../utils.dart';
 
-class MedTypeCard extends StatelessWidget {
-  const MedTypeCard(
+class TypeCard extends StatelessWidget {
+  const TypeCard(
       {super.key,
       this.onPressed,
       required this.isSelected,

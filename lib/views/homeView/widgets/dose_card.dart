@@ -117,6 +117,6 @@ class DoseCard extends StatelessWidget {
   }
 
   IconData isTakenToIcon(bool isTaken) {
-    return isTaken ? FontAwesomeIcons.check : formToIcon(dose.form);
+    return isTaken ? FontAwesomeIcons.check : intFormToIconData(dose.form);
   }
 }

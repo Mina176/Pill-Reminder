@@ -16,9 +16,10 @@ class DetalisView extends StatelessWidget {
         child: Column(
           children: [
             CustomAppBar(text: 'Medicine Details'),
-            SizedBox(height: 10),
-            DetailsViewBody(
-              dose: dose,
+            Expanded(
+              child: DetailsViewBody(
+                dose: dose,
+              ),
             ),
           ],
         ),

@@ -33,7 +33,7 @@ class MedFormSection extends StatelessWidget {
             child: Row(
               children: List.generate(typeIcons.length, (index) {
                 return Expanded(
-                    child: MedTypeCard(
+                    child: TypeCard(
                   formInt: index,
                   cardColor:
                       selectedindex == index ? kPrimaryColor : Colors.white,

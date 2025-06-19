@@ -1,36 +1,31 @@
 import 'package:flutter/material.dart';
 import '../../../constants.dart';
-import '../../../models/dose_model.dart';
-import '../../../utils.dart';
 
-class SelectedTime extends StatelessWidget {
-  const SelectedTime({
+class CustomDetailsCard extends StatelessWidget {
+  const CustomDetailsCard({
     super.key,
-    required this.dose,
+    required this.displayedText,
   });
-
-  final DoseModel dose;
-
+  final String displayedText;
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      padding: const EdgeInsets.all(8.0),
       child: Container(
-        width: 120,
         height: 50,
         decoration: BoxDecoration(
             color: kPrimaryColor,
             borderRadius: BorderRadius.circular(8),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withValues(alpha: 0.2),
+                color: Colors.black.withValues(alpha: 0.1),
                 blurRadius: 4,
                 spreadRadius: 1,
               )
             ]),
         child: Center(
           child: Text(
-            timeObjectToString(dose.time!),
+            displayedText,
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.w600,

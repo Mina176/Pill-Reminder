@@ -72,7 +72,7 @@ class _AddDoseTimeViewBodyState extends State<AddDoseTimeViewBody> {
                 setState(() => selectedTime =
                     TimeOfDay(hour: newTime.hour, minute: newTime.minute));
               }),
-          selectedText: formatTime(selectedTime),
+          selectedText: timeOfDayToString(selectedTime),
         ),
         Spacer(),
         RemindMeSection(

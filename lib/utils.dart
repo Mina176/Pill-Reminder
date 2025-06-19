@@ -101,7 +101,7 @@ class CupertinoModalPickerWrapper extends StatelessWidget {
   }
 }
 
-IconData formToIcon(int val) {
+IconData intFormToIconData(int val) {
   if (val == 0) {
     return FontAwesomeIcons.tablets;
   } else if (val == 1) {
@@ -140,12 +140,9 @@ addDose(DoseModel dose) async {
   await doseBox.add(dose);
 }
 
-String formatTime(TimeOfDay? selectedTime) {
-  if (selectedTime == null) return "9:00 AM";
-  final hour = selectedTime.hourOfPeriod.toString();
-  final minute = selectedTime.minute.toString().padLeft(2, '0');
-  final period = selectedTime.period == DayPeriod.am ? "AM" : "PM";
-  return "$hour:$minute $period";
+deleteMed(DoseModel dose) {
+  final box = Hive.box<DoseModel>(kDoseBox);
+  box.delete(dose.key);
 }
 
 String formatSelectedDate(DateTime? date) {
@@ -155,6 +152,18 @@ String formatSelectedDate(DateTime? date) {
   return DateFormat('MMM d, y').format(date);
 }
 
+String timeOfDayToString(TimeOfDay? selectedTime) {
+  if (selectedTime == null) return "9:00 AM";
+  final hour = selectedTime.hourOfPeriod.toString();
+  final minute = selectedTime.minute.toString().padLeft(2, '0');
+  final period = selectedTime.period == DayPeriod.am ? "AM" : "PM";
+  return "$hour:$minute $period";
+}
+
 String timeObjectToString(Time time) {
-  return '${time.hour}:${time.minute}';
+  final hour = time.hour % 12 == 0 ? 12 : time.hour % 12;
+  final hourStr = hour.toString().padLeft(2, '0');
+  final minuteStr = time.minute.toString().padLeft(2, '0');
+  final period = time.hour < 12 ? 'AM' : 'PM';
+  return '$hourStr:$minuteStr $period';
 }
