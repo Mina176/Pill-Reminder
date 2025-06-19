@@ -34,4 +34,4 @@ final List<String> durations = [
 
 const kSectionsSpace = SizedBox(height: 10);
 
-const kBottomSpace = SizedBox(height: 10);
+const kBottomSpace = SizedBox(height: 5);

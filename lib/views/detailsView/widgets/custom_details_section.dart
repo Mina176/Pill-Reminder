@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
 import '../../../models/dose_model.dart';
-import 'details_details_card.dart';
+import 'custom_details_card.dart';
 
 class CustomDetailsSection extends StatelessWidget {
   const CustomDetailsSection({

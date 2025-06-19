@@ -24,7 +24,7 @@ class DoseModelAdapter extends TypeAdapter<DoseModel> {
       dose: fields[2] as int,
       food: fields[3] as int,
       duration: fields[4] as int,
-      time: fields[5] as Time?,
+      time: fields[5] as Time,
       date: fields[8] as DateTime?,
     );
   }

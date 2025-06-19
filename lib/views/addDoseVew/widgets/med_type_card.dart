@@ -20,7 +20,7 @@ class TypeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: GestureDetector(
         onTap: onPressed,
         child: Container(
@@ -40,9 +40,6 @@ class TypeCard extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(
-                height: 5,
-              ),
               Icon(
                 icon,
                 size: 32,
@@ -58,9 +55,6 @@ class TypeCard extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 20,
                     color: isSelected ? Colors.white : kPrimaryColor),
-              ),
-              SizedBox(
-                height: 5,
               ),
             ],
           ),

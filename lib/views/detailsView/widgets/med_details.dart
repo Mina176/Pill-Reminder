@@ -47,7 +47,7 @@ class MedDetails extends StatelessWidget {
         CustomDetailsSection(
           dose: dose,
           title: 'Time',
-          displayedText: timeObjectToString(dose.time!),
+          displayedText: timeObjectToString(dose.time),
         ),
         AlarmIs(
           dose: dose,

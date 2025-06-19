@@ -4,7 +4,6 @@ import 'package:pill_reminder/views/addDoseVew/widgets/custom_btn.dart';
 import 'package:pill_reminder/views/addDoseVew/widgets/med_dose_select_section.dart';
 import 'package:pill_reminder/views/addDoseVew/widgets/med_duration_sec.dart';
 import 'package:pill_reminder/views/addDoseVew/widgets/remind_me_section.dart';
-import 'package:pill_reminder/views/widgets/custom_app_bar.dart';
 import '../../../constants.dart';
 import '../../../utils.dart';
 import 'add_med_name_section.dart';
@@ -49,7 +48,6 @@ class _AddDoseBodyState extends State<AddDoseBody> {
       ));
       Navigator.pop(context);
     } else {
-      
       autovalidateMode = AutovalidateMode.always;
       setState(() {});
     }
@@ -77,10 +75,6 @@ class _AddDoseBodyState extends State<AddDoseBody> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          CustomAppBar(text: 'Add Medicine'),
-          SizedBox(
-            height: 10,
-          ),
           AddMedNameSection(
             controller: controller,
             validator: (value) {
@@ -92,6 +86,8 @@ class _AddDoseBodyState extends State<AddDoseBody> {
             },
             autovalidateMode: autovalidateMode,
           ),
+
+          kSectionsSpace,
           MedFormSection(
             selectedindex: selectedForm,
             onChanged: (value) {
@@ -100,9 +96,7 @@ class _AddDoseBodyState extends State<AddDoseBody> {
               });
             },
           ),
-          SizedBox(
-            height: 5,
-          ),
+          kSectionsSpace,
           DoseSection(
             selectedindex: selectedDose,
             onChanged: (value) {
@@ -111,9 +105,7 @@ class _AddDoseBodyState extends State<AddDoseBody> {
               });
             },
           ),
-          SizedBox(
-            height: 5,
-          ),
+          kSectionsSpace,
           FoodAndMedSection(
             selectedindex: selectedFood,
             onChanged: (value) {
@@ -123,7 +115,7 @@ class _AddDoseBodyState extends State<AddDoseBody> {
             },
           ),
           /////////////////////////////Dose Time////////////////////////////////////
-          SizedBox(height: 15),
+          kSectionsSpace,
           MedSelectionSec(
               title: 'Starting from:',
               onTap: () => showDatePickerIos(
@@ -165,17 +157,16 @@ class _AddDoseBodyState extends State<AddDoseBody> {
               });
             },
           ),
-          kBottomSpace,
+
+          kSectionsSpace,
+          kSectionsSpace,
           CustomBtn(
             onTap: () => addMed(),
             label: 'Add Medicine',
-          )
+          ),
+          kBottomSpace
         ],
       ),
     );
-  }
-
-  Time timeofDayToTimeObject(TimeOfDay timeofDay) {
-    return Time(hour: timeofDay.hour, minute: timeofDay.minute);
   }
 }
