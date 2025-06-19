@@ -13,15 +13,15 @@ class DoseModel extends HiveObject {
   @HiveField(3)
   final int food;
   @HiveField(4)
-  int duration;
+  final int duration;
   @HiveField(5)
-  Time? time;
+  final Time? time;
   @HiveField(6)
   bool remind;
   @HiveField(7)
   bool isTaken;
   @HiveField(8)
-  DateTime? date;
+  final DateTime? date;
 
   DoseModel(
       {this.isTaken = false,

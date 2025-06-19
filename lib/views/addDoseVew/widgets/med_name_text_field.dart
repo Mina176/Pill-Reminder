@@ -7,7 +7,7 @@ class MedNameTextField extends StatelessWidget {
       {super.key,
       required this.controller,
       required this.autovalidateMode,
-    required  this.validator});
+      required this.validator});
 
   final TextEditingController controller;
   final AutovalidateMode autovalidateMode;

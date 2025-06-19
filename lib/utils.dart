@@ -135,7 +135,7 @@ String intFoodToString(int val) {
   }
 }
 
-addDose(DoseModel dose) async {
+addDoseToBox(DoseModel dose) async {
   var doseBox = Hive.box<DoseModel>(kDoseBox);
   await doseBox.add(dose);
 }
@@ -160,6 +160,10 @@ String timeOfDayToString(TimeOfDay? selectedTime) {
   return "$hour:$minute $period";
 }
 
+Time timeofDayToTimeObject(TimeOfDay timeofDay) {
+  return Time(hour: timeofDay.hour, minute: timeofDay.minute);
+}
+
 String timeObjectToString(Time time) {
   final hour = time.hour % 12 == 0 ? 12 : time.hour % 12;
   final hourStr = hour.toString().padLeft(2, '0');
@@ -167,3 +171,8 @@ String timeObjectToString(Time time) {
   final period = time.hour < 12 ? 'AM' : 'PM';
   return '$hourStr:$minuteStr $period';
 }
+
+
+String alarmIs(bool remind) {
+    return remind ? 'on' : 'off';
+  }

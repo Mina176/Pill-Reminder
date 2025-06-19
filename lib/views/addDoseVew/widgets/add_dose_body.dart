@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:pill_reminder/models/dose_model.dart';
-import 'package:pill_reminder/views/addDoseTimeView/add_dose_time_view.dart';
+import 'package:pill_reminder/views/addDoseVew/widgets/custom_btn.dart';
 import 'package:pill_reminder/views/addDoseVew/widgets/med_dose_select_section.dart';
+import 'package:pill_reminder/views/addDoseVew/widgets/med_duration_sec.dart';
+import 'package:pill_reminder/views/addDoseVew/widgets/remind_me_section.dart';
 import 'package:pill_reminder/views/widgets/custom_app_bar.dart';
+import '../../../constants.dart';
+import '../../../utils.dart';
 import 'add_med_name_section.dart';
-import 'custom_next_btn.dart';
 import 'food_and_med_section.dart';
 import 'med_type_select_section.dart';
 
@@ -17,43 +20,45 @@ class AddDoseBody extends StatefulWidget {
 
 class _AddDoseBodyState extends State<AddDoseBody> {
   String? medName;
-  int selectedDose = 0;
   int selectedForm = 0;
+  int selectedDose = 0;
   int selectedFood = 0;
+
+  DateTime? selectedDate;
+  int selectedDuration = 2;
+  TimeOfDay? selectedTime;
 
   bool remind = true;
 
-  TimeOfDay? selectedTime;
-
-  int selectedDuration = 2;
-
-  late TextEditingController controller;
-  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
-
-  nextOnTap() {
+  addMed() {
     if (controller.text.isNotEmpty) {
       setState(() {
         medName = controller.text;
       });
-      DoseModel dose = DoseModel(
+      addDoseToBox(DoseModel(
         medName: medName!,
         form: selectedForm,
         dose: selectedDose,
         food: selectedFood,
-      );
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => AddDoseTimeView(
-            dose: dose,
-          ),
-        ),
-      );
+        date: selectedDate,
+        duration: selectedDuration,
+        time: timeofDayToTimeObject(
+            selectedTime ?? TimeOfDay(hour: 9, minute: 0)),
+        remind: remind,
+        isTaken: false,
+      ));
+      Navigator.pop(context);
     } else {
+      
       autovalidateMode = AutovalidateMode.always;
       setState(() {});
     }
   }
+
+  late TextEditingController controller;
+  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
+
+  nextOnTap() {}
 
   @override
   void initState() {
@@ -69,58 +74,108 @@ class _AddDoseBodyState extends State<AddDoseBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        CustomAppBar(text: 'Add Medicine'),
-        SizedBox(
-          height: 10,
-        ),
-        AddMedNameSection(
-          controller: controller,
-          validator: (value) {
-            if (value?.isEmpty ?? true) {
-              return 'Field is required';
-            } else {
-              return null;
-            }
-          },
-          autovalidateMode: autovalidateMode,
-        ),
-        MedFormSection(
-          selectedindex: selectedForm,
-          onChanged: (value) {
-            setState(() {
-              selectedForm = value;
-            });
-          },
-        ),
-        SizedBox(
-          height: 5,
-        ),
-        DoseSection(
-          selectedindex: selectedDose,
-          onChanged: (value) {
-            setState(() {
-              selectedDose = value;
-            });
-          },
-        ),
-        SizedBox(
-          height: 5,
-        ),
-        FoodAndMedSection(
-          selectedindex: selectedFood,
-          onChanged: (value) {
-            setState(() {
-              selectedFood = value;
-            });
-          },
-        ),
-        Spacer(),
-        NextCustomBtn(
-          onTap: () => nextOnTap(),
-        )
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          CustomAppBar(text: 'Add Medicine'),
+          SizedBox(
+            height: 10,
+          ),
+          AddMedNameSection(
+            controller: controller,
+            validator: (value) {
+              if (value?.isEmpty ?? true) {
+                return 'Field is required';
+              } else {
+                return null;
+              }
+            },
+            autovalidateMode: autovalidateMode,
+          ),
+          MedFormSection(
+            selectedindex: selectedForm,
+            onChanged: (value) {
+              setState(() {
+                selectedForm = value;
+              });
+            },
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          DoseSection(
+            selectedindex: selectedDose,
+            onChanged: (value) {
+              setState(() {
+                selectedDose = value;
+              });
+            },
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          FoodAndMedSection(
+            selectedindex: selectedFood,
+            onChanged: (value) {
+              setState(() {
+                selectedFood = value;
+              });
+            },
+          ),
+          /////////////////////////////Dose Time////////////////////////////////////
+          SizedBox(height: 15),
+          MedSelectionSec(
+              title: 'Starting from:',
+              onTap: () => showDatePickerIos(
+                    context: context,
+                    onDateChanged: (DateTime newDate) =>
+                        setState(() => selectedDate = newDate),
+                  ),
+              selectedText: formatSelectedDate(selectedDate)),
+          kSectionsSpace,
+          MedSelectionSec(
+            title: 'Duration:',
+            onTap: () => showItemPickerIos(
+              context: context,
+              initialItem: selectedDuration,
+              listName: durations,
+              onitemChanged: (int value) {
+                setState(() => selectedDuration = value);
+              },
+            ),
+            selectedText: durations[selectedDuration],
+          ),
+          kSectionsSpace,
+          MedSelectionSec(
+            title: 'Time:',
+            onTap: () => showTimePickerIos(
+                context: context,
+                selectedTime: selectedTime ?? TimeOfDay(hour: 9, minute: 00),
+                onTimeChanged: (newTime) {
+                  setState(() => selectedTime =
+                      TimeOfDay(hour: newTime.hour, minute: newTime.minute));
+                }),
+            selectedText: timeOfDayToString(selectedTime),
+          ),
+          RemindMeSection(
+            value: remind,
+            onChanged: (value) {
+              setState(() {
+                remind = value;
+              });
+            },
+          ),
+          kBottomSpace,
+          CustomBtn(
+            onTap: () => addMed(),
+            label: 'Add Medicine',
+          )
+        ],
+      ),
     );
+  }
+
+  Time timeofDayToTimeObject(TimeOfDay timeofDay) {
+    return Time(hour: timeofDay.hour, minute: timeofDay.minute);
   }
 }

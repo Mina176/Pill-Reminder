@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
 import '../../../models/dose_model.dart';
-import 'details_food_card.dart';
+import 'details_details_card.dart';
 
 class CustomDetailsSection extends StatelessWidget {
   const CustomDetailsSection({
@@ -23,10 +23,16 @@ class CustomDetailsSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Text(title, style: kSubTitleStyle),
+        SizedBox(
+          height: 5,
+        ),
         widget ??
             CustomDetailsCard(
               displayedText: displayedText ?? '',
-            )
+            ),
+        SizedBox(
+          height: 5,
+        ),
       ],
     );
   }
