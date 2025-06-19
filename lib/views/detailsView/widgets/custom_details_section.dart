@@ -24,7 +24,7 @@ class CustomDetailsSection extends StatelessWidget {
       children: [
         Text(title, style: kSubTitleStyle),
         SizedBox(
-          height: 5,
+          height: 2,
         ),
         widget ??
             CustomDetailsCard(

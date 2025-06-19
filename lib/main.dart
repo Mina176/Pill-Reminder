@@ -15,7 +15,7 @@ Future<void> initHiveBox() async {
   Hive.registerAdapter(TimeAdapter());
   Hive.registerAdapter(DoseModelAdapter());
   await Hive.openBox<DoseModel>(kDoseBox);
-}
+} 
 
 class PillReminder extends StatelessWidget {
   const PillReminder({super.key});

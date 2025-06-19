@@ -18,7 +18,7 @@ class CustomMedName extends StatelessWidget {
       overflow: TextOverflow.ellipsis,
       style: TextStyle(
         color: Colors.black,
-        fontSize: 34,
+        fontSize: 28,
         fontWeight: FontWeight.w900,
       ),
     );

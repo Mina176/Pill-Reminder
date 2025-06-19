@@ -18,6 +18,7 @@ class DetailsViewBody extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           MedDetails(dose: dose),
+          Spacer(),
           DetailsButtons(dose: dose),
           kBottomSpace
         ],

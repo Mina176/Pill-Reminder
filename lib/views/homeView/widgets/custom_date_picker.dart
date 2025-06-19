@@ -2,34 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 
-class CustomDatePicker extends StatefulWidget {
-  const CustomDatePicker({super.key});
+import '../../../utils.dart';
 
-  @override
-  State<CustomDatePicker> createState() => _CustomDatePickerState();
-}
+class CustomDatePicker extends StatelessWidget {
+  const CustomDatePicker(
+      {super.key, required this.onIconPressed, this.selectedDate});
 
-class _CustomDatePickerState extends State<CustomDatePicker> {
-  DateTime selectedDate = DateTime.now();
-
-  String formatDate(DateTime date) {
-    return DateFormat('MMM d, yyyy').format(selectedDate);
-  }
-
-  Future pickDate() async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: selectedDate,
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2100),
-    );
-    if (picked != null && picked != selectedDate) {
-      setState(() {
-        selectedDate = picked;
-      });
-    }
-  }
-
+  final VoidCallback onIconPressed;
+  final DateTime? selectedDate;
+  
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -37,11 +18,11 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
       child: Row(
         children: [
           Text(
-            formatDate(selectedDate),
+            formatDate(selectedDate ?? DateTime.now()),
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900),
           ),
           IconButton(
-            onPressed: pickDate,
+            onPressed: onIconPressed,
             icon: Icon(FontAwesomeIcons.solidCalendarDays),
           ),
         ],

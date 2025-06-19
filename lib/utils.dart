@@ -145,6 +145,11 @@ deleteMed(DoseModel dose) {
   box.delete(dose.key);
 }
 
+String formatDate(DateTime date) {
+    return DateFormat('MMM d, yyyy').format(date);
+  }
+ 
+
 String formatSelectedDate(DateTime? date) {
   if (date == null) {
     return DateFormat('MMM d, y').format(DateTime.now());

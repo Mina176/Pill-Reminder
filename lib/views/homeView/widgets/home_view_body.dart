@@ -4,6 +4,7 @@ import 'package:pill_reminder/models/dose_model.dart';
 import 'package:pill_reminder/views/homeView/widgets/custom_date_picker.dart';
 import '../../../constants.dart';
 import 'dose_cards_list_view.dart';
+import 'no_doses.dart';
 
 class HomeViewBody extends StatefulWidget {
   const HomeViewBody({
@@ -17,11 +18,14 @@ class HomeViewBody extends StatefulWidget {
 class _HomeViewBodyState extends State<HomeViewBody> {
   final ScrollController controller = ScrollController();
 
+  DateTime selectedDate = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        CustomDatePicker(),
+        CustomDatePicker(
+            selectedDate: selectedDate, onIconPressed: () => pickDate()),
         ValueListenableBuilder(
           valueListenable: Hive.box<DoseModel>(kDoseBox).listenable(),
           builder: (context, Box<DoseModel> box, _) {
@@ -41,30 +45,18 @@ class _HomeViewBodyState extends State<HomeViewBody> {
       ],
     );
   }
-}
 
-class NoDoses extends StatelessWidget {
-  const NoDoses({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            "No Doses here",
-            style: kTitleStyle,
-          ),
-          Text(
-            'Click on \'Add New Dose\'',
-            style: kTitleStyle.copyWith(fontSize: 16),
-          ),
-        ],
-      ),
+  Future pickDate() async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2100),
     );
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+      });
+    }
   }
 }
