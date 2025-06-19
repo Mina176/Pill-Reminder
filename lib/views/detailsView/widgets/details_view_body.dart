@@ -8,7 +8,6 @@ import 'package:pill_reminder/views/addDoseVew/widgets/dose_count_item.dart';
 import 'package:pill_reminder/views/addDoseVew/widgets/food_and_med_section.dart';
 import 'package:pill_reminder/views/addDoseVew/widgets/med_type_card.dart';
 import 'package:pill_reminder/views/detailsView/widgets/selected_time.dart';
-import 'package:pill_reminder/views/widgets/custom_app_bar.dart';
 import '../../../utils.dart';
 import 'custom_animated_btn.dart';
 import 'selected_duration.dart';
@@ -25,10 +24,8 @@ class DetailsViewBody extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomAppBar(text: 'Medicine Details'),
-          SizedBox(height: 10),
           MedNameSection(dose: dose),
-          Expanded(child: MedDetails(dose: dose)),
+          Flexible(child: MedDetails(dose: dose)),
           Buttons(dose: dose),
         ],
       ),

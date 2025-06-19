@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../constants.dart';
 import '../../../models/dose_model.dart';
+import '../../../utils.dart';
 
 class SelectedTime extends StatelessWidget {
   const SelectedTime({
@@ -29,7 +30,7 @@ class SelectedTime extends StatelessWidget {
             ]),
         child: Center(
           child: Text(
-            dose.time,
+            timeObjectToString(dose.time!),
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.w600,
@@ -40,4 +41,6 @@ class SelectedTime extends StatelessWidget {
       ),
     );
   }
+
+  
 }

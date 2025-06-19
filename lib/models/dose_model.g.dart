@@ -24,7 +24,7 @@ class DoseModelAdapter extends TypeAdapter<DoseModel> {
       dose: fields[2] as int,
       food: fields[3] as int,
       duration: fields[4] as int,
-      time: fields[5] as String,
+      time: fields[5] as Time?,
       date: fields[8] as DateTime?,
     );
   }
@@ -60,6 +60,43 @@ class DoseModelAdapter extends TypeAdapter<DoseModel> {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is DoseModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class TimeAdapter extends TypeAdapter<Time> {
+  @override
+  final int typeId = 1;
+
+  @override
+  Time read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return Time(
+      hour: fields[0] as int,
+      minute: fields[1] as int,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, Time obj) {
+    writer
+      ..writeByte(2)
+      ..writeByte(0)
+      ..write(obj.hour)
+      ..writeByte(1)
+      ..write(obj.minute);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is TimeAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

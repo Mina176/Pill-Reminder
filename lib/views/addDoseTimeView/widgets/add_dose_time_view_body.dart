@@ -20,11 +20,16 @@ class _AddDoseTimeViewBodyState extends State<AddDoseTimeViewBody> {
   DateTime? selectedDate;
   bool remind = true;
 
+  Time timeofDayToTimeObject(TimeOfDay timeofDay) {
+    return Time(hour: timeofDay.hour, minute: timeofDay.minute);
+  }
+
   addMed() {
     widget.dose.date = selectedDate;
     widget.dose.duration = selectedDuration;
     widget.dose.remind = remind;
-    widget.dose.time = formatTime(selectedTime);
+    widget.dose.time =
+        timeofDayToTimeObject(selectedTime ?? TimeOfDay(hour: 9, minute: 0));
 
     addDose(widget.dose);
     Navigator.pop(context);

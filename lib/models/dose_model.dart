@@ -15,7 +15,7 @@ class DoseModel extends HiveObject {
   @HiveField(4)
   int duration;
   @HiveField(5)
-  String time;
+  Time? time;
   @HiveField(6)
   bool remind;
   @HiveField(7)
@@ -31,6 +31,19 @@ class DoseModel extends HiveObject {
       this.dose = 0,
       this.food = 0,
       this.duration = 2,
-      this.time = '9:00',
+      this.time,
       this.date});
+}
+
+@HiveType(typeId: 1)
+class Time extends HiveObject {
+  @HiveField(0)
+  final int hour;
+  @HiveField(1)
+  final int minute;
+
+  Time({
+    required this.hour,
+    required this.minute,
+  });
 }

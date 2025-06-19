@@ -154,3 +154,7 @@ String formatSelectedDate(DateTime? date) {
   }
   return DateFormat('MMM d, y').format(date);
 }
+
+String timeObjectToString(Time time) {
+  return '${time.hour}:${time.minute}';
+}

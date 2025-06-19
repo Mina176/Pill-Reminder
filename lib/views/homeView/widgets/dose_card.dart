@@ -101,7 +101,7 @@ class DoseCard extends StatelessWidget {
                         width: 8,
                       ),
                       Text(
-                        dose.time,
+                        timeObjectToString(dose.time!),
                         style: TextStyle(
                             fontWeight: FontWeight.w800, fontSize: 16),
                       ),
