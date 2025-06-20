@@ -32,7 +32,6 @@ class _HomeViewBodyState extends State<HomeViewBody> {
             final alldoses = box.values.toList();
             WidgetsBinding.instance.addPostFrameCallback((_) {
               if (controller.hasClients) {
-                controller.jumpTo(controller.position.maxScrollExtent);
               }
             });
             if (box.values.isEmpty) return NoDoses();
@@ -60,3 +59,4 @@ class _HomeViewBodyState extends State<HomeViewBody> {
     }
   }
 }
+

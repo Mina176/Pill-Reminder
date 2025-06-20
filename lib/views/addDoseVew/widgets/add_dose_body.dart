@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:pill_reminder/constants.dart';
 import 'package:pill_reminder/models/dose_model.dart';
+import 'package:pill_reminder/utils.dart';
 import 'package:pill_reminder/views/addDoseVew/widgets/custom_btn.dart';
 import 'package:pill_reminder/views/addDoseVew/widgets/med_dose_select_section.dart';
 import 'package:pill_reminder/views/addDoseVew/widgets/med_duration_sec.dart';
 import 'package:pill_reminder/views/addDoseVew/widgets/remind_me_section.dart';
-import '../../../constants.dart';
-import '../../../utils.dart';
 import 'add_med_name_section.dart';
 import 'food_and_med_section.dart';
 import 'med_type_select_section.dart';
@@ -30,10 +30,8 @@ class _AddDoseBodyState extends State<AddDoseBody> {
   bool remind = true;
 
   addMed() {
-    if (controller.text.isNotEmpty) {
-      setState(() {
-        medName = controller.text;
-      });
+    if (textController.text.isNotEmpty) {
+      medName = textController.text;
       addDoseToBox(DoseModel(
         medName: medName!,
         form: selectedForm,
@@ -49,34 +47,36 @@ class _AddDoseBodyState extends State<AddDoseBody> {
       Navigator.pop(context);
     } else {
       autovalidateMode = AutovalidateMode.always;
+      scrollController.jumpTo(scrollController.position.minScrollExtent);
       setState(() {});
     }
   }
 
-  late TextEditingController controller;
-  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
+  final ScrollController scrollController = ScrollController();
 
-  nextOnTap() {}
+  late TextEditingController textController;
+  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
 
   @override
   void initState() {
     super.initState();
-    controller = TextEditingController();
+    textController = TextEditingController();
   }
 
   @override
   void dispose() {
-    controller.dispose();
+    textController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      controller: scrollController,
       child: Column(
         children: [
           AddMedNameSection(
-            controller: controller,
+            controller: textController,
             validator: (value) {
               if (value?.isEmpty ?? true) {
                 return 'Field is required';
@@ -86,7 +86,6 @@ class _AddDoseBodyState extends State<AddDoseBody> {
             },
             autovalidateMode: autovalidateMode,
           ),
-
           kSectionsSpace,
           MedFormSection(
             selectedindex: selectedForm,
@@ -100,18 +99,14 @@ class _AddDoseBodyState extends State<AddDoseBody> {
           DoseSection(
             selectedindex: selectedDose,
             onChanged: (value) {
-              setState(() {
-                selectedDose = value;
-              });
+              setState(() => selectedDose = value);
             },
           ),
           kSectionsSpace,
           FoodAndMedSection(
             selectedindex: selectedFood,
             onChanged: (value) {
-              setState(() {
-                selectedFood = value;
-              });
+              setState(() => selectedFood = value);
             },
           ),
           /////////////////////////////Dose Time////////////////////////////////////
@@ -152,12 +147,9 @@ class _AddDoseBodyState extends State<AddDoseBody> {
           RemindMeSection(
             value: remind,
             onChanged: (value) {
-              setState(() {
-                remind = value;
-              });
+              setState(() => remind = value);
             },
           ),
-
           kSectionsSpace,
           kSectionsSpace,
           CustomBtn(

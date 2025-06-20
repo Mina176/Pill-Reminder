@@ -103,5 +103,3 @@ class _DoseCardsListViewState extends State<DoseCardsListView> {
         topRight: Radius.circular(16), bottomRight: Radius.circular(16));
   }
 }
-
-

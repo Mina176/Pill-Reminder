@@ -20,11 +20,19 @@ class AlarmIs extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             dose.remind
-                ? Icon(FontAwesomeIcons.solidBell)
-                : Icon(FontAwesomeIcons.solidBellSlash),
+                ? Icon(
+                    FontAwesomeIcons.solidBell,
+                    color: kPrimaryColor,
+                  )
+                : Icon(
+                    FontAwesomeIcons.solidBellSlash,
+                    color: kPrimaryColor,
+                  ),
             Text(
               'Alarm is ${alarmIs(dose.remind)}',
-              style: kSubTitleStyle,
+              style: kSubTitleStyle.copyWith(
+                color: kPrimaryColor,
+              ),
             ),
           ],
         ),
