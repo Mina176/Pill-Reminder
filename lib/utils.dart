@@ -6,6 +6,14 @@ import 'package:intl/intl.dart';
 import 'package:pill_reminder/models/dose_model.dart';
 import 'constants.dart';
 
+Future<void> initHiveBox() async {
+  await Hive.initFlutter();
+  Hive.registerAdapter(TimeAdapter());
+  Hive.registerAdapter(DoseModelAdapter());
+  await Hive.openBox<DoseModel>(kDoseBox);
+}
+
+
 Future<dynamic> showDatePickerIos({
   required BuildContext context,
   required ValueChanged<DateTime> onDateChanged,
