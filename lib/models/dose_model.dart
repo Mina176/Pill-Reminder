@@ -15,13 +15,11 @@ class DoseModel extends HiveObject {
   @HiveField(4)
   final int duration;
   @HiveField(5)
-  final Time time;
-  @HiveField(6)
   bool remind;
-  @HiveField(7)
+  @HiveField(6)
   bool isTaken;
-  @HiveField(8)
-  final DateTime? date;
+  @HiveField(7)
+  final DateTime? dateTime;
 
   DoseModel(
       {required this.isTaken,
@@ -31,19 +29,5 @@ class DoseModel extends HiveObject {
       required this.dose,
       required this.food,
       required this.duration,
-      required this.time,
-      required this.date});
-}
-
-@HiveType(typeId: 1)
-class Time extends HiveObject {
-  @HiveField(0)
-  final int hour;
-  @HiveField(1)
-  final int minute;
-
-  Time({
-    required this.hour,
-    required this.minute,
-  });
+      required this.dateTime});
 }

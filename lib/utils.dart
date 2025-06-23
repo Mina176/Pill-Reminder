@@ -8,15 +8,13 @@ import 'constants.dart';
 
 Future<void> initHiveBox() async {
   await Hive.initFlutter();
-  Hive.registerAdapter(TimeAdapter());
   Hive.registerAdapter(DoseModelAdapter());
   await Hive.openBox<DoseModel>(kDoseBox);
 }
 
-
-Future<dynamic> showDatePickerIos({
+Future<DateTime?> showDatePickerIos({
   required BuildContext context,
-  required ValueChanged<DateTime> onDateChanged,
+  required ValueChanged<DateTime?> onDateChanged,
 }) {
   return showCupertinoModalPopup(
       context: context,
@@ -52,18 +50,17 @@ Future<dynamic> showItemPickerIos({
 
 Future<dynamic> showTimePickerIos({
   required BuildContext context,
-  required TimeOfDay selectedTime,
+  required DateTime selectedTime,
   required ValueChanged<DateTime> onTimeChanged,
 }) {
   return showCupertinoModalPopup(
       context: context,
       builder: (context) => CupertinoModalPickerWrapper(
               picker: CupertinoDatePicker(
-            use24hFormat: false,
             initialDateTime: DateTime(
-              0,
-              0,
-              0,
+              selectedTime.year,
+              selectedTime.month,
+              selectedTime.day,
               selectedTime.hour,
               selectedTime.minute,
             ),
@@ -154,9 +151,8 @@ deleteMed(DoseModel dose) {
 }
 
 String formatDate(DateTime date) {
-    return DateFormat('MMM d, yyyy').format(date);
-  }
- 
+  return DateFormat('MMM d, yyyy').format(date);
+}
 
 String formatSelectedDate(DateTime? date) {
   if (date == null) {
@@ -165,30 +161,10 @@ String formatSelectedDate(DateTime? date) {
   return DateFormat('MMM d, y').format(date);
 }
 
-String timeOfDayToString(TimeOfDay? selectedTime) {
-  if (selectedTime == null) return "9:00 AM";
-  final hour = selectedTime.hourOfPeriod.toString();
-  final minute = selectedTime.minute.toString().padLeft(2, '0');
-  final period = selectedTime.period == DayPeriod.am ? "AM" : "PM";
-  return "$hour:$minute $period";
+String dateTimeTohourAndMinutes(DateTime? dateTime) {
+  return '${dateTime!.hour}:${dateTime.minute}';
 }
-
-Time timeofDayToTimeObject(TimeOfDay timeofDay) {
-  return Time(hour: timeofDay.hour, minute: timeofDay.minute);
-}
-
-String timeObjectToString(Time time) {
-  final hour = time.hour % 12 == 0 ? 12 : time.hour % 12;
-  final hourStr = hour.toString().padLeft(2, '0');
-  final minuteStr = time.minute.toString().padLeft(2, '0');
-  final period = time.hour < 12 ? 'AM' : 'PM';
-  return '$hourStr:$minuteStr $period';
-}
-
 
 String alarmIs(bool remind) {
-    return remind ? 'on' : 'off';
-  }
-
-
-  
+  return remind ? 'on' : 'off';
+}

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pill_reminder/notification_service.dart';
 import 'package:pill_reminder/utils.dart';
-
+import 'package:pill_reminder/views/homeView/home_view.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,32 +18,6 @@ class PillReminder extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(fontFamily: 'Nunito'),
-        home: Scaffold(
-          body: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  NotificationService().showInstantNotification(
-                    title: 'Test Notification',
-                    body: 'This is a test notification.',
-                  );
-                },
-                child: const Text('Show Instant Notification'),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  NotificationService().scheduledReminder(
-                    id: 1,
-                    title: 'Test Notification',
-                    body: 'This is a test notification.',
-                  );
-                },
-                child: const Text('Schedule Notification'),
-              ),
-            ],
-          ),
-        ));
+        home: HomeView());
   }
 }

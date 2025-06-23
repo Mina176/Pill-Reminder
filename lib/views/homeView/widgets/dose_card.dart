@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:pill_reminder/constants.dart';
 import 'package:pill_reminder/models/dose_model.dart';
 import '../../../utils.dart';
@@ -101,7 +102,9 @@ class DoseCard extends StatelessWidget {
                         width: 8,
                       ),
                       Text(
-                        timeObjectToString(dose.time),
+                        dose.dateTime != null
+                            ? DateFormat('hh:mm a').format(dose.dateTime!)
+                            : '',
                         style: TextStyle(
                             fontWeight: FontWeight.w800, fontSize: 16),
                       ),

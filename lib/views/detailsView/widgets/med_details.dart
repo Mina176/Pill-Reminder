@@ -47,7 +47,7 @@ class MedDetails extends StatelessWidget {
         CustomDetailsSection(
           dose: dose,
           title: 'Time',
-          displayedText: timeObjectToString(dose.time),
+          displayedText: dateTimeTohourAndMinutes(dose.dateTime),
         ),
         AlarmIs(
           dose: dose,
@@ -55,4 +55,6 @@ class MedDetails extends StatelessWidget {
       ],
     );
   }
+
+  
 }

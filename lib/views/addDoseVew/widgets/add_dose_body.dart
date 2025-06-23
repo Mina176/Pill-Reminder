@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:pill_reminder/constants.dart';
 import 'package:pill_reminder/models/dose_model.dart';
 import 'package:pill_reminder/utils.dart';
@@ -6,6 +7,7 @@ import 'package:pill_reminder/views/addDoseVew/widgets/custom_btn.dart';
 import 'package:pill_reminder/views/addDoseVew/widgets/med_dose_select_section.dart';
 import 'package:pill_reminder/views/addDoseVew/widgets/med_duration_sec.dart';
 import 'package:pill_reminder/views/addDoseVew/widgets/remind_me_section.dart';
+import '../../../notification_service.dart';
 import 'add_med_name_section.dart';
 import 'food_and_med_section.dart';
 import 'med_type_select_section.dart';
@@ -18,14 +20,15 @@ class AddDoseBody extends StatefulWidget {
 }
 
 class _AddDoseBodyState extends State<AddDoseBody> {
+  static DateTime selectedDateTime = DateTime(2025, 6, 23 , 9 , 0);
+
+
   String? medName;
   int selectedForm = 0;
   int selectedDose = 0;
   int selectedFood = 0;
 
-  DateTime? selectedDate;
   int selectedDuration = 2;
-  TimeOfDay? selectedTime;
 
   bool remind = true;
 
@@ -37,13 +40,17 @@ class _AddDoseBodyState extends State<AddDoseBody> {
         form: selectedForm,
         dose: selectedDose,
         food: selectedFood,
-        date: selectedDate,
+        dateTime: selectedDateTime,
         duration: selectedDuration,
-        time: timeofDayToTimeObject(
-            selectedTime ?? TimeOfDay(hour: 9, minute: 0)),
         remind: remind,
         isTaken: false,
       ));
+      NotificationService().scheduledReminder(
+        id: 1,
+        title: 'Test Notification',
+        body: 'This is a test notification.',
+        scheduledDateTime: selectedDateTime,
+      );
       Navigator.pop(context);
     } else {
       autovalidateMode = AutovalidateMode.always;
@@ -113,12 +120,8 @@ class _AddDoseBodyState extends State<AddDoseBody> {
           kSectionsSpace,
           MedSelectionSec(
               title: 'Starting from:',
-              onTap: () => showDatePickerIos(
-                    context: context,
-                    onDateChanged: (DateTime newDate) =>
-                        setState(() => selectedDate = newDate),
-                  ),
-              selectedText: formatSelectedDate(selectedDate)),
+              onTap: () => pickDate(context),
+              selectedText: formatSelectedDate(selectedDateTime)),
           kSectionsSpace,
           MedSelectionSec(
             title: 'Duration:',
@@ -135,15 +138,10 @@ class _AddDoseBodyState extends State<AddDoseBody> {
           kSectionsSpace,
           MedSelectionSec(
             title: 'Time:',
-            onTap: () => showTimePickerIos(
-                context: context,
-                selectedTime: selectedTime ?? TimeOfDay(hour: 9, minute: 00),
-                onTimeChanged: (newTime) {
-                  setState(() => selectedTime =
-                      TimeOfDay(hour: newTime.hour, minute: newTime.minute));
-                }),
-            selectedText: timeOfDayToString(selectedTime),
+            onTap: () => pickTime(context),
+            selectedText: DateFormat('hh:mm a').format(selectedDateTime),
           ),
+
           RemindMeSection(
             value: remind,
             onChanged: (value) {
@@ -160,5 +158,31 @@ class _AddDoseBodyState extends State<AddDoseBody> {
         ],
       ),
     );
+  }
+
+  Future<DateTime?> pickDate(BuildContext context) {
+    return showDatePickerIos(
+        context: context,
+        onDateChanged: (DateTime? newDate) {
+          if (newDate == null) return;
+          setState(() => selectedDateTime = newDate);
+        });
+  }
+
+  Future<dynamic> pickTime(BuildContext context) {
+    return showTimePickerIos(
+        context: context,
+        selectedTime: selectedDateTime,
+        onTimeChanged: (DateTime newTime) {
+          setState(
+            () => selectedDateTime = DateTime(
+              selectedDateTime.year,
+              selectedDateTime.month,
+              selectedDateTime.day,
+              newTime.hour,
+              newTime.minute,
+            ),
+          );
+        });
   }
 }
